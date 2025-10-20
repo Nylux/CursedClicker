@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="CursedClicker"
-run/main_scene="uid://cb5d6acvbq4m6"
+run/main_scene="uid://bouehet8hlp0g"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
