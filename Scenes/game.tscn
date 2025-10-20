@@ -1,5 +1,126 @@
-[gd_scene format=3 uid="uid://cb5d6acvbq4m6"]
+[gd_scene load_steps=5 format=3 uid="uid://cb5d6acvbq4m6"]
+
+[ext_resource type="Script" uid="uid://dwc2k1lnyrvcu" path="res://Scripts/game_manager.gd" id="1_ebmjs"]
+[ext_resource type="ButtonGroup" uid="uid://dukkw3iib560h" path="res://Scenes/button_group_click_modifier.tres" id="2_qxrlw"]
+[ext_resource type="Texture2D" uid="uid://c7ytfwrhc4guj" path="res://Assets/human.png" id="3_wrm1d"]
+[ext_resource type="Texture2D" uid="uid://e20w28swmmpv" path="res://Assets/cultist.png" id="4_3dryh"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_ebmjs")
+button_group = ExtResource("2_qxrlw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginStatistics" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginStatistics"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HBoxPopulation" type="HBoxContainer" parent="CanvasLayer/MarginStatistics/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxPopulation"]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxPopulation/AspectRatioContainer"]
+layout_mode = 2
+texture = ExtResource("3_wrm1d")
+
+[node name="CurrentPopulationLabel" type="Label" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxPopulation"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Lorem Ipsum"
+horizontal_alignment = 2
+
+[node name="SepLabel" type="Label" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxPopulation"]
+layout_mode = 2
+text = "/"
+horizontal_alignment = 2
+
+[node name="MaxPopulationLabel" type="Label" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxPopulation"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Lorem Ipsum"
+horizontal_alignment = 2
+
+[node name="HBoxCultist" type="HBoxContainer" parent="CanvasLayer/MarginStatistics/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxCultist"]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxCultist/AspectRatioContainer"]
+layout_mode = 2
+texture = ExtResource("4_3dryh")
+
+[node name="CurrentCultistLabel" type="Label" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxCultist"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Lorem Ipsum"
+horizontal_alignment = 2
+
+[node name="SepLabel" type="Label" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxCultist"]
+layout_mode = 2
+text = "/"
+horizontal_alignment = 2
+
+[node name="MaxCultistLabel" type="Label" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxCultist"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Lorem Ipsum"
+horizontal_alignment = 2
+
+[node name="MarginButtonGroup" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -228.0
+offset_right = 228.0
+offset_bottom = 40.0
+grow_horizontal = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_constants/margin_top = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginButtonGroup"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ButtonTimes1" type="Button" parent="CanvasLayer/MarginButtonGroup/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_qxrlw")
+text = "Lorem Ipsum"
+
+[node name="ButtonTimes10" type="Button" parent="CanvasLayer/MarginButtonGroup/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_qxrlw")
+text = "Lorem Ipsum"
+
+[node name="ButtonTimes100" type="Button" parent="CanvasLayer/MarginButtonGroup/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_qxrlw")
+text = "Lorem Ipsum"
+
+[node name="ButtonTimes1000" type="Button" parent="CanvasLayer/MarginButtonGroup/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_qxrlw")
+text = "Lorem Ipsum"
