@@ -145,26 +145,82 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 4
 
+[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer"]
+visible = false
+custom_minimum_size = Vector2(480, 480)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="TemplateUi" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
 layout_mode = 2
 
-[node name="TemplateUi2" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+[node name="Control2" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(480, 480)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TemplateUi2" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+visible = false
+layout_mode = 2
+
+[node name="Control3" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(480, 480)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="TemplateUi3" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+visible = false
 layout_mode = 2
+
+[node name="Control4" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(480, 480)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="TemplateUi4" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+visible = false
 layout_mode = 2
+
+[node name="Control5" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(480, 480)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="TemplateUi5" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+visible = false
 layout_mode = 2
+
+[node name="Control6" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(480, 480)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="TemplateUi6" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+visible = false
 layout_mode = 2
+
+[node name="Control7" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(480, 480)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="TemplateUi7" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+visible = false
 layout_mode = 2
 
+[node name="Control8" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(480, 480)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="TemplateUi8" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+visible = false
 layout_mode = 2
