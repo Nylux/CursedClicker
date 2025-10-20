@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgb3sx8hrnurm"]
+
+[ext_resource type="Script" uid="uid://c2d86k0f1pt0c" path="res://Scripts/end_menu.gd" id="1_bg38y"]
+
+[node name="EndMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bg38y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -108.5
+offset_right = 340.0
+offset_bottom = 108.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+
+[node name="GameOverMargin" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="GameOverLabel" type="Label" parent="VBoxContainer/GameOverMargin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "You cursed the World."
+
+[node name="Buttons" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 16
+
+[node name="BackToMenuBtn" type="Button" parent="VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Back to Menu"
+
+[node name="QuitBtn" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Quit"
