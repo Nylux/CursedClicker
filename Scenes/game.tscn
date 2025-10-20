@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cb5d6acvbq4m6"]
+[gd_scene load_steps=6 format=3 uid="uid://cb5d6acvbq4m6"]
 
 [ext_resource type="Script" uid="uid://dwc2k1lnyrvcu" path="res://Scripts/game_manager.gd" id="1_ebmjs"]
-[ext_resource type="ButtonGroup" uid="uid://dukkw3iib560h" path="res://Scenes/button_group_click_modifier.tres" id="2_qxrlw"]
+[ext_resource type="ButtonGroup" uid="uid://dukkw3iib560h" path="res://button_group_click_modifier.tres" id="2_qxrlw"]
 [ext_resource type="Texture2D" uid="uid://c7ytfwrhc4guj" path="res://Assets/human.png" id="3_wrm1d"]
 [ext_resource type="Texture2D" uid="uid://e20w28swmmpv" path="res://Assets/cultist.png" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://d1se5bk828m00" path="res://Scenes/template_ui.tscn" id="5_wowpa"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ebmjs")
@@ -11,116 +12,159 @@ button_group = ExtResource("2_qxrlw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginStatistics" type="MarginContainer" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginStatistics"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 8
 
-[node name="HBoxPopulation" type="HBoxContainer" parent="CanvasLayer/MarginStatistics/VBoxContainer"]
+[node name="HBoxPopulation" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxPopulation"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxPopulation"]
 layout_mode = 2
 stretch_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxPopulation/AspectRatioContainer"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxPopulation/AspectRatioContainer"]
 layout_mode = 2
 texture = ExtResource("3_wrm1d")
 
-[node name="CurrentPopulationLabel" type="Label" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxPopulation"]
-custom_minimum_size = Vector2(100, 0)
+[node name="CurrentPopulationLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxPopulation"]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "Lorem Ipsum"
 horizontal_alignment = 2
 
-[node name="SepLabel" type="Label" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxPopulation"]
+[node name="SepLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxPopulation"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "/"
 horizontal_alignment = 2
 
-[node name="MaxPopulationLabel" type="Label" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxPopulation"]
-custom_minimum_size = Vector2(100, 0)
+[node name="MaxPopulationLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxPopulation"]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "Lorem Ipsum"
 horizontal_alignment = 2
 
-[node name="HBoxCultist" type="HBoxContainer" parent="CanvasLayer/MarginStatistics/VBoxContainer"]
+[node name="HBoxCultist" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxCultist"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxCultist"]
 layout_mode = 2
 stretch_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxCultist/AspectRatioContainer"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxCultist/AspectRatioContainer"]
 layout_mode = 2
 texture = ExtResource("4_3dryh")
 
-[node name="CurrentCultistLabel" type="Label" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxCultist"]
-custom_minimum_size = Vector2(100, 0)
+[node name="CurrentCultistLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxCultist"]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "Lorem Ipsum"
 horizontal_alignment = 2
 
-[node name="SepLabel" type="Label" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxCultist"]
+[node name="SepLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxCultist"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "/"
 horizontal_alignment = 2
 
-[node name="MaxCultistLabel" type="Label" parent="CanvasLayer/MarginStatistics/VBoxContainer/HBoxCultist"]
-custom_minimum_size = Vector2(100, 0)
+[node name="MaxCultistLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxCultist"]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "Lorem Ipsum"
 horizontal_alignment = 2
 
-[node name="MarginButtonGroup" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -228.0
-offset_right = 228.0
-offset_bottom = 40.0
-grow_horizontal = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-theme_override_constants/margin_top = 32
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginButtonGroup"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
+size_flags_vertical = 4
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="ButtonTimes1" type="Button" parent="CanvasLayer/MarginButtonGroup/HBoxContainer"]
+[node name="ButtonTimes1" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 toggle_mode = true
 button_group = ExtResource("2_qxrlw")
 text = "Lorem Ipsum"
 
-[node name="ButtonTimes10" type="Button" parent="CanvasLayer/MarginButtonGroup/HBoxContainer"]
+[node name="ButtonTimes10" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 toggle_mode = true
 button_group = ExtResource("2_qxrlw")
 text = "Lorem Ipsum"
 
-[node name="ButtonTimes100" type="Button" parent="CanvasLayer/MarginButtonGroup/HBoxContainer"]
+[node name="ButtonTimes100" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 toggle_mode = true
 button_group = ExtResource("2_qxrlw")
 text = "Lorem Ipsum"
 
-[node name="ButtonTimes1000" type="Button" parent="CanvasLayer/MarginButtonGroup/HBoxContainer"]
+[node name="ButtonTimes1000" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 toggle_mode = true
 button_group = ExtResource("2_qxrlw")
 text = "Lorem Ipsum"
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 4
+
+[node name="TemplateUi" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+layout_mode = 2
+
+[node name="TemplateUi2" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+layout_mode = 2
+
+[node name="TemplateUi3" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+layout_mode = 2
+
+[node name="TemplateUi4" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+layout_mode = 2
+
+[node name="TemplateUi5" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+layout_mode = 2
+
+[node name="TemplateUi6" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+layout_mode = 2
+
+[node name="TemplateUi7" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+layout_mode = 2
+
+[node name="TemplateUi8" parent="CanvasLayer/VBoxContainer/GridContainer" instance=ExtResource("5_wowpa")]
+layout_mode = 2
