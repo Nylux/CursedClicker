@@ -1,0 +1,76 @@
+[gd_scene load_steps=2 format=3 uid="uid://bouehet8hlp0g"]
+
+[ext_resource type="Script" uid="uid://nl6pp31ggo6d" path="res://Scripts/main_menu.gd" id="1_28flt"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_28flt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="TitleMargin" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer/TitleMargin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "CURSOR"
+
+[node name="MenuButtons" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 16
+
+[node name="CultNameLineEdit" type="LineEdit" parent="VBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+placeholder_text = "Name your Cult"
+alignment = 1
+clear_button_enabled = true
+caret_blink = true
+
+[node name="StartGameBtn" type="Button" parent="VBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Start Game"
+
+[node name="QuitBtn" type="Button" parent="VBoxContainer/MenuButtons"]
+layout_mode = 2
+text = "Quit"
+
+[node name="CreditsMargin" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CreditsMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="AuthorLabel" type="Label" parent="VBoxContainer/CreditsMargin/VBoxContainer"]
+layout_mode = 2
+text = "Made by Zizani & Nylux"
+horizontal_alignment = 1
+
+[node name="JamLabel" type="Label" parent="VBoxContainer/CreditsMargin/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "for BAUDO'S Jam - Autumn Edition (2025)"
+horizontal_alignment = 1
