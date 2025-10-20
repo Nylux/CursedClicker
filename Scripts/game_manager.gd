@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var button_container: HBoxContainer = $CanvasLayer/MarginButtonGroup/HBoxContainer
-@onready var statistics_container: VBoxContainer = $CanvasLayer/MarginStatistics/VBoxContainer
+@onready var button_container: HBoxContainer = $CanvasLayer/VBoxContainer/HBoxContainer/HBoxContainer
+@onready var statistics_container: VBoxContainer = $CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer
 @export var button_group: ButtonGroup
 
 var click_multiplier: int = 1
