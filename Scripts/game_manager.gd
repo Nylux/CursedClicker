@@ -9,8 +9,6 @@ var max_population: int = 8_253_443_180
 var current_population: int
 var current_cultist: int
 
-var features_graph: UnlockableGraph
-
 func _ready() -> void:
 	var button1: Button = button_container.get_node("ButtonTimes1")
 	button1.text = "X   1"
@@ -33,20 +31,6 @@ func _ready() -> void:
 	max_cultist_label.text = "%s" % max_population
 	
 	button_group.pressed.connect(_on_button_group_pressed)
-
-	## example of tree use
-	features_graph = UnlockableGraph.new()
-	var rituals := UnlockableNode.new("rituals")
-	var cotton := UnlockableNode.new("cotton", ["rituals"])
-	var academy := UnlockableNode.new("academy", ["rituals", "cotton"])
-	features_graph.add(rituals)
-	features_graph.add(cotton)
-	features_graph.add(academy)
-
-	print(features_graph.get_next_unlock())
-	print(features_graph.is_unlockable(rituals))
-	features_graph.unlock(rituals)
-	print(features_graph.get_next_unlock())
 
 func _on_button_group_pressed(button: Button) -> void:
 	match button.name:
