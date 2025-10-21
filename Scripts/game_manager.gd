@@ -49,3 +49,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			print("Effect %s" % click_multiplier)
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			print("Effect %s" % (-1 * click_multiplier))
+	elif event is InputEventKey and event.pressed:
+		if event.keycode == KEY_F12:
+			FeaturesGraph.unlock_next_node()
+			
