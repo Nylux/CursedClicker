@@ -49,4 +49,4 @@ func _on_ui_clicked(element: AnimatedTextureRect) -> void:
 	if element != animated_texture:
 		return
 
-	EventBus.cultist_sacrificied.emit(1)
+	EventBus.asked_cultist_sacrificied.emit()
