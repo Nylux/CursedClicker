@@ -1,5 +1,5 @@
 extends Node
-	
+
 @onready var button_container: HBoxContainer = $/root/Game/CanvasLayer/VBoxContainer/HBoxContainer/HBoxContainer
 @export var button_group: ButtonGroup
 
@@ -9,6 +9,8 @@ var count_click: int = 0
 func _ready() -> void:
 	EventBus.clicked.connect(_on_ui_clicked)
 	EventBus.asked_cultist_sacrificied.connect(_on_asked_cultist_sacrificied)
+	button_group.pressed.connect(_on_button_group_pressed)
+
 	## button group
 	var button1: Button = button_container.get_node("ButtonTimes1")
 	button1.text = "X   1"
@@ -18,7 +20,6 @@ func _ready() -> void:
 	button100.text = "X  100"
 	var button1000: Button = button_container.get_node("ButtonTimes1000")
 	button1000.text = "X 1000"
-	button_group.pressed.connect(_on_button_group_pressed)
 
 func _on_ui_clicked(_ui: AnimatedTextureRect) -> void:
 	count_click += 1
