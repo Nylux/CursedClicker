@@ -25,11 +25,11 @@ func _on_cultist_created(amount: int):
 		FeaturesGraph.unlock_node(FeaturesGraph.altar)
 
 func _on_cultist_sacrificied(amount: int):
-	if current_cultist > 0:
-		current_cultist -= amount
-		max_population -= amount
-		EventBus.blood_created.emit(amount)
-		update_ui()
+	var sacrificied_amout: int = min(amount, current_cultist)
+	current_cultist -= sacrificied_amout
+	max_population -= sacrificied_amout
+	EventBus.blood_created.emit(sacrificied_amout)
+	update_ui()
 
 func update_ui() -> void:
 	var current_population_label: Label = statistics_container.get_node("HBoxPopulation/CurrentPopulationLabel")

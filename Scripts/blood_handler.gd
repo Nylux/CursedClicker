@@ -1,5 +1,7 @@
 extends Node
 
+class_name BloodHandler
+
 @onready var statistics_container: VBoxContainer = $/root/Game/CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer
 
 var current_blood: int

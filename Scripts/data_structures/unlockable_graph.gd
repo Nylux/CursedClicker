@@ -40,7 +40,7 @@ func unlock(unlockable_node: UnlockableNode) -> void:
 		return
 	var position_queue: int = _queue.find(unlockable_node)
 	if position_queue == -1:
-		push_error("Not Found")
+		push_error("Not Found %s in queue" % unlockable_node)
 		return
 
 	var node = _queue.pop_at(position_queue)
