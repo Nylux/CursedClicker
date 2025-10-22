@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cb5d6acvbq4m6"]
+[gd_scene load_steps=10 format=3 uid="uid://cb5d6acvbq4m6"]
 
 [ext_resource type="Script" uid="uid://dwc2k1lnyrvcu" path="res://Scripts/game_manager.gd" id="1_ebmjs"]
 [ext_resource type="ButtonGroup" uid="uid://dukkw3iib560h" path="res://button_group_click_modifier.tres" id="2_qxrlw"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://d1se5bk828m00" path="res://Scenes/template_ui.tscn" id="5_wowpa"]
 [ext_resource type="SpriteFrames" uid="uid://i2c05e63otl8" path="res://pentagram_animation.tres" id="6_i6g32"]
 [ext_resource type="Script" uid="uid://dfgstesvf663q" path="res://Scripts/rituals_handler.gd" id="7_1l0tm"]
+[ext_resource type="Script" uid="uid://bjwtahrmhgmwv" path="res://Scripts/progression_handler.gd" id="8_v158k"]
+[ext_resource type="Script" uid="uid://duoc0467vgjk7" path="res://Scripts/cultist_creation.gd" id="9_h4fw4"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ebmjs")
@@ -24,6 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -140,6 +143,10 @@ toggle_mode = true
 button_group = ExtResource("2_qxrlw")
 text = "Lorem Ipsum"
 
+[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -237,5 +244,11 @@ layout_mode = 2
 script = ExtResource("7_1l0tm")
 ui = NodePath("../CanvasLayer/VBoxContainer/GridContainer/TemplateUi")
 title = "Rituals"
+
+[node name="ProgressionHandler" type="Node" parent="."]
+script = ExtResource("8_v158k")
+
+[node name="CultistCreation" type="Node" parent="."]
+script = ExtResource("9_h4fw4")
 
 [editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUi"]

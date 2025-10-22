@@ -2,35 +2,39 @@ extends Node
 
 class_name RitualsHandler
 
-signal cultist_created
 signal click_power_changed(value)
 
 @export var ui: SubViewportContainer
 @export var title: String
-var animated_texture: AnimatedTextureRect
+@onready var tilte_node = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Title")
+@onready var animated_texture: AnimatedTextureRect = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer/TextureRect")
+@onready var stat_container = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/MarginContainer")
+@onready var stat_placeholder = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/Placeholder")
+@onready var stat = stat_container.get_node("Statistics")
 
 var click_power: float = 0.5
 var current_power: float = 0.0
-var n_stat: int = 1
+@export var n_stat: int = 1
 
 func on_ready() -> void:
-	ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Title").text = title
-	animated_texture = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer/TextureRect")
+	# setup ui elements
+	tilte_node.text = title
 	EventBus.clicked.connect(_on_ui_clicked)
 	animated_texture.complete_circle.connect(_on_complete_circle)
-	
+
+	# setup internal logic
 	current_power = 0.0
 
 func create_stats():
-	var stat_container = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/MarginContainer")
 	stat_container.visible = true
-	var stat = stat_container.get_node("Statistics")
 	
+	# title for stats
 	var stat_title = Label.new()
 	stat_title.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	stat_title.text = "Statistics"
 	stat.add_child(stat_title)
 
+	# stats elements
 	for i in n_stat:
 		var placeholder = Control.new()
 		placeholder.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -41,10 +45,10 @@ func create_stats():
 		label.text = "Lorem Ipsum"
 		label.visible = false
 		stat.add_child(label)
-	ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/Placeholder").visible = false
+
+	stat_placeholder.visible = false
 
 func unlock_stat(index: int) -> void:
-	var stat = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/MarginContainer/Statistics")
 	stat.get_child(1 + 2*index).visible = false
 	stat.get_child(1 + 2*index + 1).visible = true
 	stat.get_child(1 + 2*index + 1).text = "Click Power: %s" % click_power
@@ -63,7 +67,7 @@ func _on_ui_clicked(element: AnimatedTextureRect) -> void:
 		animated_texture.set_next_frame()
 
 func _on_complete_circle() -> void:
-	cultist_created.emit()
+	EventBus.cultist_created.emit(1)
 
 func click_power_add(amount: float):
 	click_power += amount
