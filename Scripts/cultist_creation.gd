@@ -28,3 +28,6 @@ func _on_new_conversion(new_cultist):
 	current_population_label.text ="%s" %  current_population
 	var current_cultist_label: Label = statistics_container.get_node("HBoxCultist/CurrentCultistLabel")
 	current_cultist_label.text = "%s" % current_cultist
+	
+	if current_cultist == 1:
+		FeaturesGraph.unlock_node(FeaturesGraph.altar)

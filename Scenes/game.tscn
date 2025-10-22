@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cb5d6acvbq4m6"]
+[gd_scene load_steps=13 format=3 uid="uid://cb5d6acvbq4m6"]
 
 [ext_resource type="Script" uid="uid://dwc2k1lnyrvcu" path="res://Scripts/game_manager.gd" id="1_ebmjs"]
 [ext_resource type="ButtonGroup" uid="uid://dukkw3iib560h" path="res://button_group_click_modifier.tres" id="2_qxrlw"]
@@ -7,9 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://d1se5bk828m00" path="res://Scenes/template_ui.tscn" id="5_wowpa"]
 [ext_resource type="SpriteFrames" uid="uid://i2c05e63otl8" path="res://pentagram_animation.tres" id="6_i6g32"]
 [ext_resource type="Script" uid="uid://dfgstesvf663q" path="res://Scripts/rituals_handler.gd" id="7_1l0tm"]
+[ext_resource type="SpriteFrames" uid="uid://c5rxorjum05hs" path="res://altar_animation.tres" id="7_rku1e"]
 [ext_resource type="Script" uid="uid://bjwtahrmhgmwv" path="res://Scripts/progression_handler.gd" id="8_v158k"]
 [ext_resource type="Script" uid="uid://duoc0467vgjk7" path="res://Scripts/cultist_creation.gd" id="9_h4fw4"]
 [ext_resource type="Script" uid="uid://dsho78fxdotph" path="res://Scripts/click_handler.gd" id="10_ldgsr"]
+[ext_resource type="Script" uid="uid://d3d1bjiaxakg6" path="res://Scripts/altar_handler.gd" id="11_o5yvi"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ebmjs")
@@ -181,6 +183,12 @@ size_flags_vertical = 3
 visible = false
 layout_mode = 2
 
+[node name="SubViewport" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2" index="0"]
+render_target_update_mode = 0
+
+[node name="TextureRect" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2/SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer" index="1"]
+sprites = ExtResource("7_rku1e")
+
 [node name="Control3" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(480, 480)
 layout_mode = 2
@@ -255,4 +263,10 @@ script = ExtResource("9_h4fw4")
 [node name="ClickHandler" type="Node" parent="."]
 script = ExtResource("10_ldgsr")
 
+[node name="AltarHandler" type="Node" parent="." node_paths=PackedStringArray("ui")]
+script = ExtResource("11_o5yvi")
+ui = NodePath("../CanvasLayer/VBoxContainer/GridContainer/TemplateUi2")
+title = "Altar"
+
 [editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUi"]
+[editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2"]
