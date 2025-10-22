@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://c5rxorjum05hs"]
+
+[ext_resource type="Texture2D" uid="uid://ddq1bptqwxkdr" path="res://Assets/altar-Sheet.png" id="1_kt1wx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dd5pj"]
+atlas = ExtResource("1_kt1wx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mywpv"]
+atlas = ExtResource("1_kt1wx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvpye"]
+atlas = ExtResource("1_kt1wx")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihns8"]
+atlas = ExtResource("1_kt1wx")
+region = Rect2(192, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dd5pj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mywpv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvpye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihns8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

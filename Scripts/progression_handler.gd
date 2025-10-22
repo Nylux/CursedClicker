@@ -22,5 +22,6 @@ func features_creation(prog: FeaturesGraph.PROGRESSION) -> void:
 		FeaturesGraph.PROGRESSION.ALTAR:
 			$/root/Game/CanvasLayer/VBoxContainer/GridContainer/Control2.visible = false
 			$/root/Game/CanvasLayer/VBoxContainer/GridContainer/TemplateUi2.visible = true
+			$/root/Game/AltarHandler.on_ready()
 		_:
 			push_error("Invalid feature %s" % prog)
