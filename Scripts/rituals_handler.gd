@@ -16,7 +16,9 @@ var click_power: float = 0.5
 var current_power: float = 0.0
 @export var n_stat: int = 1
 
-func on_ready() -> void:
+func _ready() -> void:
+	# unlock rituals at start
+	FeaturesGraph.unlock_node(FeaturesGraph.rituals)
 	# setup ui elements
 	tilte_node.text = title
 	EventBus.clicked.connect(_on_ui_clicked)

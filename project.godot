@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 FeaturesGraph="*res://Scripts/features_graph.gd"
 EventBus="*res://Scripts/event_bus.gd"
+GameManager="*res://Scripts/game_manager.gd"
 
 [display]
 

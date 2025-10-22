@@ -1,7 +1,15 @@
 extends Node
 
+# clicked on a AnimatedTextureRect
 signal clicked(ui)
+
+# used when a new amount of cultists is added to the current amount
 signal cultist_created(amount)
-signal asked_cultist_sacrificied()
+# used when the amount of cultist is changed
+signal cultist_changed(amount)
+
+# clicked on altar
 signal cultist_sacrificied(amount)
+
+# sent
 signal blood_created(amount)

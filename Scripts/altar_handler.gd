@@ -12,7 +12,8 @@ class_name AltarHandler
 
 @export var n_stat: int = 1
 
-func on_ready() -> void:
+func _ready() -> void:
+	EventBus.cultist_changed.connect(_on_cultist_changed)
 	# setup ui elements
 	tilte_node.text = title
 	EventBus.clicked.connect(_on_ui_clicked)
@@ -48,5 +49,10 @@ func unlock_stat(index: int) -> void:
 func _on_ui_clicked(element: AnimatedTextureRect) -> void:
 	if element != animated_texture:
 		return
+	print("hihi i'm hidden")
+	EventBus.cultist_sacrificied.emit(GameManager.click_multiplier)
 
-	EventBus.asked_cultist_sacrificied.emit()
+func _on_cultist_changed(amount: int) -> void:
+	if amount == 1:
+		FeaturesGraph.unlock_node(FeaturesGraph.altar)
+		EventBus.cultist_changed.disconnect(_on_cultist_changed)
