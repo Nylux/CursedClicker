@@ -38,4 +38,3 @@ func update_ui() -> void:
 	max_population_label.text ="%s" %  max_population
 	var max_cultist_label: Label = statistics_container.get_node("HBoxCultist/MaxCultistLabel")
 	max_cultist_label.text = "%s" % max_population
-	

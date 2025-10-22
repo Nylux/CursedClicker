@@ -9,7 +9,7 @@ signal cultist_created(amount)
 signal cultist_changed(amount)
 
 # clicked on altar
-signal cultist_sacrificied(amount)
+signal sacrifice_created(amount)
 
-# sent
+# generated blood
 signal blood_created(amount)

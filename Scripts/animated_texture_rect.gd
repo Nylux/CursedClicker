@@ -1,3 +1,4 @@
+# extention of TextureRect to enable animation in a control
 extends TextureRect
 
 class_name AnimatedTextureRect

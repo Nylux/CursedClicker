@@ -5,7 +5,6 @@ var button_container: HBoxContainer
 
 func _ready() -> void:
 	button_container = $/root/Game/CanvasLayer/VBoxContainer/HBoxContainer/HBoxContainer
-	EventBus.clicked.connect(_on_ui_clicked)
 	button_group.pressed.connect(_on_button_group_pressed)
 
 	## button group
@@ -17,9 +16,6 @@ func _ready() -> void:
 	button100.text = "X  100"
 	var button1000: Button = button_container.get_node("ButtonTimes1000")
 	button1000.text = "X 1000"
-
-func _on_ui_clicked(_ui: AnimatedTextureRect) -> void:
-	GameManager.count_click += 1
 
 func _on_button_group_pressed(button: Button) -> void:
 	match button.name:

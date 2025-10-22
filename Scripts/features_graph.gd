@@ -1,3 +1,4 @@
+# storage of all unlockable nodes and graph describing how the game progresses
 extends Node
 
 var features := UnlockableGraph.new()

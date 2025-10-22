@@ -1,11 +1,13 @@
+# script to handle the progression system
+# described how each unlockable node interact with the whole game
 extends Node
 
 func _ready() -> void:
 	for node: UnlockableNode in FeaturesGraph.nodes:
 		node.connect_unlocked(features_creation.bind(FeaturesGraph.nodes[node])) 
 
-
 func features_creation(prog: FeaturesGraph.PROGRESSION) -> void:
+	print(prog)
 	match prog:
 		FeaturesGraph.PROGRESSION.RITUALS:
 			$/root/Game/CanvasLayer/VBoxContainer/GridContainer/Control.visible = false
