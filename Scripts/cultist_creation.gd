@@ -7,27 +7,37 @@ var current_population: int
 var current_cultist: int
 
 func _ready() -> void:
-
 	# handles new cultist created
-	EventBus.cultist_created.connect(_on_new_conversion)
+	EventBus.cultist_created.connect(_on_cultist_created)
+	EventBus.cultist_sacrificied.connect(_on_cultist_sacrificied)
 
 	# ui setup
 	current_population = max_population
 	current_cultist = 0
-	var max_population_label: Label = statistics_container.get_node("HBoxPopulation/MaxPopulationLabel")
-	max_population_label.text ="%s" %  max_population
-	var max_cultist_label: Label = statistics_container.get_node("HBoxCultist/MaxCultistLabel")
-	max_cultist_label.text = "%s" % max_population
-	_on_new_conversion(0)
+	update_ui()
 
-func _on_new_conversion(new_cultist):
-	# update ui
-	current_population -= new_cultist
-	current_cultist += new_cultist
+func _on_cultist_created(amount: int):
+	current_population -= amount
+	current_cultist += amount
+	update_ui()
+
+	if current_cultist == 1:
+		FeaturesGraph.unlock_node(FeaturesGraph.altar)
+
+func _on_cultist_sacrificied(amount: int):
+	if current_cultist > 0:
+		current_cultist -= amount
+		max_population -= amount
+		EventBus.blood_created.emit(amount)
+		update_ui()
+
+func update_ui() -> void:
 	var current_population_label: Label = statistics_container.get_node("HBoxPopulation/CurrentPopulationLabel")
 	current_population_label.text ="%s" %  current_population
 	var current_cultist_label: Label = statistics_container.get_node("HBoxCultist/CurrentCultistLabel")
 	current_cultist_label.text = "%s" % current_cultist
+	var max_population_label: Label = statistics_container.get_node("HBoxPopulation/MaxPopulationLabel")
+	max_population_label.text ="%s" %  max_population
+	var max_cultist_label: Label = statistics_container.get_node("HBoxCultist/MaxCultistLabel")
+	max_cultist_label.text = "%s" % max_population
 	
-	if current_cultist == 1:
-		FeaturesGraph.unlock_node(FeaturesGraph.altar)

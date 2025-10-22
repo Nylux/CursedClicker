@@ -46,4 +46,7 @@ func unlock_stat(index: int) -> void:
 	stat.get_child(1 + 2*index + 1).text = "Placeholder"
 
 func _on_ui_clicked(element: AnimatedTextureRect) -> void:
-	pass
+	if element != animated_texture:
+		return
+
+	EventBus.cultist_sacrificied.emit(1)

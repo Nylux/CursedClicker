@@ -41,6 +41,7 @@ func unlock(unlockable_node: UnlockableNode) -> void:
 	var position_queue: int = _queue.find(unlockable_node)
 	if position_queue == -1:
 		push_error("Not Found")
+		return
 
 	var node = _queue.pop_at(position_queue)
 	for neighbor: Variant in _adj[node]:
