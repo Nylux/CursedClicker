@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cb5d6acvbq4m6"]
+[gd_scene load_steps=11 format=3 uid="uid://cb5d6acvbq4m6"]
 
 [ext_resource type="Script" uid="uid://dwc2k1lnyrvcu" path="res://Scripts/game_manager.gd" id="1_ebmjs"]
 [ext_resource type="ButtonGroup" uid="uid://dukkw3iib560h" path="res://button_group_click_modifier.tres" id="2_qxrlw"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dfgstesvf663q" path="res://Scripts/rituals_handler.gd" id="7_1l0tm"]
 [ext_resource type="Script" uid="uid://bjwtahrmhgmwv" path="res://Scripts/progression_handler.gd" id="8_v158k"]
 [ext_resource type="Script" uid="uid://duoc0467vgjk7" path="res://Scripts/cultist_creation.gd" id="9_h4fw4"]
+[ext_resource type="Script" uid="uid://dsho78fxdotph" path="res://Scripts/click_handler.gd" id="10_ldgsr"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ebmjs")
@@ -248,7 +249,10 @@ title = "Rituals"
 [node name="ProgressionHandler" type="Node" parent="."]
 script = ExtResource("8_v158k")
 
-[node name="CultistCreation" type="Node" parent="."]
+[node name="CultistHandler" type="Node" parent="."]
 script = ExtResource("9_h4fw4")
+
+[node name="ClickHandler" type="Node" parent="."]
+script = ExtResource("10_ldgsr")
 
 [editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUi"]

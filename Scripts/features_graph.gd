@@ -19,23 +19,34 @@ var rituals_improve_click3 := UnlockableNode.new("rituals_improve_click3", [ritu
 var rituals_improve_click4 := UnlockableNode.new("rituals_improve_click4", [rituals_improve_click3])
 var rituals_improve_click5 := UnlockableNode.new("rituals_improve_click5", [rituals_improve_click4])
 
-# step 2: add them in the Array of nodes
-var nodes: Array[UnlockableNode] = [
+# step 2: add a progression value
+enum PROGRESSION {
+	RITUALS,
+	ALTAR,
+	
+	RITUALS_STAT,
+	RITUALS_STAT_POWER,
+	
+	RITUALS_CLICK_POWER
+}
+
+# step 3: add them in the Dictionary of nodes
+var nodes: Dictionary[UnlockableNode, PROGRESSION] = {
 	# core feature
-	rituals,
-	altar,
+	rituals: PROGRESSION.RITUALS,
+	altar: PROGRESSION.ALTAR,
 	
 	# subfeatures
-	rituals_stat,
-	rituals_stat_power,
-
+	rituals_stat: PROGRESSION.RITUALS_STAT,
+	rituals_stat_power: PROGRESSION.RITUALS_STAT_POWER,
+	
 	# upgrades
-	rituals_improve_click1,
-	rituals_improve_click2,
-	rituals_improve_click3,
-	rituals_improve_click4,
-	rituals_improve_click5,
-]
+	rituals_improve_click1: PROGRESSION.RITUALS_CLICK_POWER,
+	rituals_improve_click2: PROGRESSION.RITUALS_CLICK_POWER,
+	rituals_improve_click3: PROGRESSION.RITUALS_CLICK_POWER,
+	rituals_improve_click4: PROGRESSION.RITUALS_CLICK_POWER,
+	rituals_improve_click5: PROGRESSION.RITUALS_CLICK_POWER,
+}
 
 func _init() -> void:
 	for n: UnlockableNode in nodes:
