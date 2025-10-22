@@ -49,8 +49,7 @@ func unlock_stat(index: int) -> void:
 func _on_ui_clicked(element: AnimatedTextureRect) -> void:
 	if element != animated_texture:
 		return
-	print("hihi i'm hidden")
-	EventBus.cultist_sacrificied.emit(GameManager.click_multiplier)
+	EventBus.sacrifice_created.emit(GameManager.click_multiplier)
 
 func _on_cultist_changed(amount: int) -> void:
 	if amount == 1:

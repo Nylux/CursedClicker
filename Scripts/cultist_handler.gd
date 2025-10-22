@@ -9,7 +9,7 @@ var current_cultist: int
 func _ready() -> void:
 	# handles new cultist created
 	EventBus.cultist_created.connect(_on_cultist_created)
-	EventBus.cultist_sacrificied.connect(_on_cultist_sacrificied)
+	EventBus.sacrifice_created.connect(_on_cultist_sacrificied)
 
 	# ui setup
 	current_population = max_population

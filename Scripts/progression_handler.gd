@@ -7,7 +7,6 @@ func _ready() -> void:
 		node.connect_unlocked(features_creation.bind(FeaturesGraph.nodes[node])) 
 
 func features_creation(prog: FeaturesGraph.PROGRESSION) -> void:
-	print(prog)
 	match prog:
 		FeaturesGraph.PROGRESSION.RITUALS:
 			$/root/Game/CanvasLayer/VBoxContainer/GridContainer/Control.visible = false
