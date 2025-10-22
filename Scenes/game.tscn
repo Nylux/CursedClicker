@@ -280,10 +280,6 @@ script = ExtResource("8_v158k")
 [node name="CultistHandler" type="Node" parent="."]
 script = ExtResource("9_h4fw4")
 
-[node name="ClickHandler" type="Node" parent="."]
-script = ExtResource("10_ldgsr")
-button_group = ExtResource("2_qxrlw")
-
 [node name="AltarHandler" type="Node" parent="." node_paths=PackedStringArray("ui")]
 script = ExtResource("11_o5yvi")
 ui = NodePath("../CanvasLayer/VBoxContainer/GridContainer/TemplateUi2")
@@ -291,6 +287,10 @@ title = "Altar"
 
 [node name="BloodHandler" type="Node" parent="."]
 script = ExtResource("14_1phco")
+
+[node name="ClickHandler" type="Node" parent="."]
+script = ExtResource("10_ldgsr")
+button_group = ExtResource("2_qxrlw")
 
 [editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUi"]
 [editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2"]

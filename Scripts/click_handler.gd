@@ -1,14 +1,11 @@
 extends Node
 
-@onready var button_container: HBoxContainer = $/root/Game/CanvasLayer/VBoxContainer/HBoxContainer/HBoxContainer
+var button_container: HBoxContainer
 @export var button_group: ButtonGroup
 
-var click_multiplier: int = 1
-var count_click: int = 0
-
 func _ready() -> void:
+	button_container = $/root/Game/CanvasLayer/VBoxContainer/HBoxContainer/HBoxContainer
 	EventBus.clicked.connect(_on_ui_clicked)
-	EventBus.asked_cultist_sacrificied.connect(_on_asked_cultist_sacrificied)
 	button_group.pressed.connect(_on_button_group_pressed)
 
 	## button group
@@ -22,18 +19,15 @@ func _ready() -> void:
 	button1000.text = "X 1000"
 
 func _on_ui_clicked(_ui: AnimatedTextureRect) -> void:
-	count_click += 1
+	GameManager.count_click += 1
 
 func _on_button_group_pressed(button: Button) -> void:
 	match button.name:
 		"ButtonTimes1":
-			click_multiplier = 1
+			GameManager.click_multiplier = 1
 		"ButtonTimes10":
-			click_multiplier = 10
+			GameManager.click_multiplier = 10
 		"ButtonTimes100":
-			click_multiplier = 100
+			GameManager.click_multiplier = 100
 		"ButtonTimes1000":
-			click_multiplier = 1000
-
-func _on_asked_cultist_sacrificied() -> void:
-	EventBus.cultist_sacrificied.emit(click_multiplier)
+			GameManager.click_multiplier = 1000

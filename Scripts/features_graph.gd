@@ -39,7 +39,7 @@ var nodes: Dictionary[UnlockableNode, PROGRESSION] = {
 	# subfeatures
 	rituals_stat: PROGRESSION.RITUALS_STAT,
 	rituals_stat_power: PROGRESSION.RITUALS_STAT_POWER,
-	
+
 	# upgrades
 	rituals_improve_click1: PROGRESSION.RITUALS_CLICK_POWER,
 	rituals_improve_click2: PROGRESSION.RITUALS_CLICK_POWER,

@@ -19,10 +19,8 @@ func _ready() -> void:
 func _on_cultist_created(amount: int):
 	current_population -= amount
 	current_cultist += amount
+	EventBus.cultist_changed.emit(current_cultist)
 	update_ui()
-
-	if current_cultist == 1:
-		FeaturesGraph.unlock_node(FeaturesGraph.altar)
 
 func _on_cultist_sacrificied(amount: int):
 	var sacrificied_amout: int = min(amount, current_cultist)
