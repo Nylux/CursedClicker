@@ -1,6 +1,8 @@
 extends Node
 
+
 # clicked on a AnimatedTextureRect
+# warning-ignore:unused_argument
 signal clicked(ui)
 
 # used when a new amount of cultists is added to the current amount
