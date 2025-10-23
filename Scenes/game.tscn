@@ -1,19 +1,22 @@
-[gd_scene load_steps=15 format=3 uid="uid://cb5d6acvbq4m6"]
+[gd_scene load_steps=18 format=3 uid="uid://cb5d6acvbq4m6"]
 
 [ext_resource type="Script" uid="uid://dwc2k1lnyrvcu" path="res://Scripts/game_manager.gd" id="1_ebmjs"]
 [ext_resource type="ButtonGroup" uid="uid://dukkw3iib560h" path="res://button_group_click_modifier.tres" id="2_qxrlw"]
 [ext_resource type="Texture2D" uid="uid://c7ytfwrhc4guj" path="res://Assets/human.png" id="3_wrm1d"]
 [ext_resource type="Texture2D" uid="uid://e20w28swmmpv" path="res://Assets/cultist.png" id="4_3dryh"]
+[ext_resource type="Texture2D" uid="uid://dp2quv6prydwt" path="res://Assets/malediction.png" id="5_nb51f"]
+[ext_resource type="Texture2D" uid="uid://cstvgkvy5qax2" path="res://Assets/zealot.png" id="5_nnt18"]
 [ext_resource type="Texture2D" uid="uid://b7feg4nnncxkf" path="res://Assets/blood.png" id="5_rfjv2"]
 [ext_resource type="PackedScene" uid="uid://d1se5bk828m00" path="res://Scenes/template_ui.tscn" id="5_wowpa"]
 [ext_resource type="SpriteFrames" uid="uid://i2c05e63otl8" path="res://pentagram_animation.tres" id="6_i6g32"]
 [ext_resource type="Script" uid="uid://dfgstesvf663q" path="res://Scripts/rituals_handler.gd" id="7_1l0tm"]
+[ext_resource type="Texture2D" uid="uid://j03r7sj7utxy" path="res://Assets/infiltrator.png" id="7_ewbju"]
 [ext_resource type="SpriteFrames" uid="uid://c5rxorjum05hs" path="res://altar_animation.tres" id="7_rku1e"]
 [ext_resource type="Script" uid="uid://bjwtahrmhgmwv" path="res://Scripts/progression_handler.gd" id="8_v158k"]
 [ext_resource type="Script" uid="uid://duoc0467vgjk7" path="res://Scripts/cultist_handler.gd" id="9_h4fw4"]
 [ext_resource type="Script" uid="uid://dsho78fxdotph" path="res://Scripts/click_handler.gd" id="10_ldgsr"]
 [ext_resource type="Script" uid="uid://d3d1bjiaxakg6" path="res://Scripts/altar_handler.gd" id="11_o5yvi"]
-[ext_resource type="Script" uid="uid://c3j8me4ca03bb" path="res://Scripts/blood_handler.gd" id="14_1phco"]
+[ext_resource type="Script" uid="uid://c3j8me4ca03bb" path="res://Scripts/resources_handler.gd" id="14_1phco"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ebmjs")
@@ -37,89 +40,122 @@ size_flags_vertical = 3
 layout_mode = 2
 theme_override_constants/margin_left = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer"]
+[node name="ResourceContainer" type="GridContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 8
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 4
+columns = 3
 
-[node name="HBoxPopulation" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxBlood" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxPopulation"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxBlood"]
 layout_mode = 2
 stretch_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxPopulation/AspectRatioContainer"]
-layout_mode = 2
-texture = ExtResource("3_wrm1d")
-
-[node name="CurrentPopulationLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxPopulation"]
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Lorem Ipsum"
-horizontal_alignment = 2
-
-[node name="SepLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxPopulation"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "/"
-horizontal_alignment = 2
-
-[node name="MaxPopulationLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxPopulation"]
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Lorem Ipsum"
-horizontal_alignment = 2
-
-[node name="HBoxCultist" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxCultist"]
-layout_mode = 2
-stretch_mode = 1
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxCultist/AspectRatioContainer"]
-layout_mode = 2
-texture = ExtResource("4_3dryh")
-
-[node name="CurrentCultistLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxCultist"]
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Lorem Ipsum"
-horizontal_alignment = 2
-
-[node name="SepLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxCultist"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "/"
-horizontal_alignment = 2
-
-[node name="MaxCultistLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxCultist"]
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Lorem Ipsum"
-horizontal_alignment = 2
-
-[node name="HBoxBlood" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxBlood"]
-layout_mode = 2
-stretch_mode = 1
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxBlood/AspectRatioContainer"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxBlood/AspectRatioContainer"]
 layout_mode = 2
 texture = ExtResource("5_rfjv2")
 
-[node name="CurrentBloodLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxBlood"]
+[node name="BloodLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxBlood"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Lorem Ipsum"
+horizontal_alignment = 2
+
+[node name="HBoxPopulation" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxPopulation"]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxPopulation/AspectRatioContainer"]
+layout_mode = 2
+texture = ExtResource("3_wrm1d")
+
+[node name="PopulationLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxPopulation"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Lorem Ipsum"
+horizontal_alignment = 2
+
+[node name="HBoxZealot" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxZealot"]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxZealot/AspectRatioContainer"]
+layout_mode = 2
+texture = ExtResource("5_nnt18")
+
+[node name="ZealotLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxZealot"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Lorem Ipsum"
+horizontal_alignment = 2
+
+[node name="HBoxCorruption" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxCorruption"]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxCorruption/AspectRatioContainer"]
+layout_mode = 2
+texture = ExtResource("5_nb51f")
+
+[node name="CorruptionLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxCorruption"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Lorem Ipsum"
+horizontal_alignment = 2
+
+[node name="HBoxCultist" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxCultist"]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxCultist/AspectRatioContainer"]
+layout_mode = 2
+texture = ExtResource("4_3dryh")
+
+[node name="CultistLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxCultist"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Lorem Ipsum"
+horizontal_alignment = 2
+
+[node name="HBoxInfiltrator" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxInfiltrator"]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxInfiltrator/AspectRatioContainer"]
+layout_mode = 2
+texture = ExtResource("7_ewbju")
+
+[node name="InfiltratorLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/ResourceContainer/HBoxInfiltrator"]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
@@ -275,7 +311,7 @@ script = ExtResource("8_v158k")
 [node name="CultistHandler" type="Node" parent="."]
 script = ExtResource("9_h4fw4")
 
-[node name="BloodHandler" type="Node" parent="."]
+[node name="ResourcesHandler" type="Node" parent="."]
 script = ExtResource("14_1phco")
 
 [node name="ClickHandler" type="Node" parent="."]

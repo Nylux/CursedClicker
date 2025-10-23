@@ -15,3 +15,5 @@ signal sacrifice_created(amount)
 
 # generated blood
 signal blood_created(amount)
+
+signal corruption_created(amount)
