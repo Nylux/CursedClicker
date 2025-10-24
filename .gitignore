@@ -4,3 +4,6 @@
 
 # Exports
 Exports/*
+
+# Godot tmp
+*.tmp

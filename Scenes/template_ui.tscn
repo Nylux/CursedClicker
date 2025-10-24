@@ -100,11 +100,3 @@ theme_override_constants/margin_bottom = 16
 
 [node name="GridContainer" type="GridContainer" parent="SubViewport/Panel/VBoxContainer/Upgrades/MarginContainer"]
 layout_mode = 2
-
-[node name="Button" type="Button" parent="SubViewport/Panel/VBoxContainer/Upgrades/MarginContainer/GridContainer"]
-layout_mode = 2
-text = "Lorem Ipsum"
-
-[node name="Button2" type="Button" parent="SubViewport/Panel/VBoxContainer/Upgrades/MarginContainer/GridContainer"]
-layout_mode = 2
-text = "Lorem Ipsum"

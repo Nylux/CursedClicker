@@ -226,7 +226,7 @@ layout_mode = 2
 [node name="SubViewport" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi" index="0"]
 render_target_update_mode = 0
 
-[node name="TextureRect" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi/SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer" index="1"]
+[node name="TextureRect" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi/SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer" index="0"]
 sprites = ExtResource("6_i6g32")
 
 [node name="Control2" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer"]
@@ -242,7 +242,7 @@ layout_mode = 2
 [node name="SubViewport" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2" index="0"]
 render_target_update_mode = 0
 
-[node name="TextureRect" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2/SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer" index="1"]
+[node name="TextureRect" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2/SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer" index="0"]
 sprites = ExtResource("7_rku1e")
 
 [node name="Control3" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer"]

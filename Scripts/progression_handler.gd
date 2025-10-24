@@ -12,9 +12,10 @@ func features_creation(prog: FeaturesGraph.PROGRESSION) -> void:
 			$/root/Game/CanvasLayer/VBoxContainer/GridContainer/Control.visible = false
 			$/root/Game/CanvasLayer/VBoxContainer/GridContainer/TemplateUi.visible = true
 		FeaturesGraph.PROGRESSION.RITUALS_STAT:
-			$/root/Game/RitualsHandler.create_stats()
+			$/root/Game/RitualsHandler.unlock_title()
 		FeaturesGraph.PROGRESSION.RITUALS_STAT_POWER:
 			$/root/Game/RitualsHandler.unlock_stat(0)
+			$/root/Game/RitualsHandler.unlock_button(0)
 		FeaturesGraph.PROGRESSION.RITUALS_CLICK_POWER:
 			$/root/Game/RitualsHandler.click_power_add(0.25)
 		FeaturesGraph.PROGRESSION.ALTAR:

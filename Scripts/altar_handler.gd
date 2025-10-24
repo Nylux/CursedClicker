@@ -10,7 +10,7 @@ class_name AltarHandler
 @onready var stat_placeholder = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/Placeholder")
 @onready var stat = stat_container.get_node("Statistics")
 
-@export var n_stat: int = 1
+@export var stat_amount: int = 1
 
 func _ready() -> void:
 	EventBus.cultist_changed.connect(_on_cultist_changed)
@@ -28,7 +28,7 @@ func create_stats():
 	stat.add_child(stat_title)
 
 	# stats elements
-	for i in n_stat:
+	for i in stat_amount:
 		var placeholder = Control.new()
 		placeholder.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		stat.add_child(placeholder)
@@ -42,6 +42,8 @@ func create_stats():
 	stat_placeholder.visible = false
 
 func unlock_stat(index: int) -> void:
+	if index >= stat_amount:
+		return
 	stat.get_child(1 + 2*index).visible = false
 	stat.get_child(1 + 2*index + 1).visible = true
 	stat.get_child(1 + 2*index + 1).text = "Placeholder"
