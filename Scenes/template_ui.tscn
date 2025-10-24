@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1se5bk828m00"]
+[gd_scene load_steps=3 format=3 uid="uid://d1se5bk828m00"]
 
-[ext_resource type="Texture2D" uid="uid://cxjpvbre5qoao" path="res://icon.svg" id="1_u4txr"]
 [ext_resource type="Script" uid="uid://lc43le6k2ayf" path="res://Scripts/animated_texture_rect.gd" id="2_ckvk3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4txr"]
@@ -38,25 +37,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Title" type="Label" parent="SubViewport/Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Lorem Ipsum"
+horizontal_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
-
-[node name="Title" type="Label" parent="SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-text = "Lorem Ipsum"
+size_flags_horizontal = 3
 
 [node name="TextureRect" type="TextureRect" parent="SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("1_u4txr")
+size_flags_vertical = 6
 stretch_mode = 2
 script = ExtResource("2_ckvk3")
 
@@ -77,6 +82,29 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Minigame" type="Control" parent="SubViewport/Panel/VBoxContainer"]
+[node name="Upgrades" type="Control" parent="SubViewport/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/Panel/VBoxContainer/Upgrades"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="GridContainer" type="GridContainer" parent="SubViewport/Panel/VBoxContainer/Upgrades/MarginContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="SubViewport/Panel/VBoxContainer/Upgrades/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Lorem Ipsum"
+
+[node name="Button2" type="Button" parent="SubViewport/Panel/VBoxContainer/Upgrades/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Lorem Ipsum"

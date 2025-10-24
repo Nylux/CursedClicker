@@ -4,7 +4,7 @@ class_name AltarHandler
 
 @export var ui: SubViewportContainer
 @export var title: String
-@onready var tilte_node = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Title")
+@onready var tilte_node = ui.get_node("SubViewport/Panel/VBoxContainer/MarginContainer/Title")
 @onready var animated_texture: AnimatedTextureRect = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer/TextureRect")
 @onready var stat_container = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/MarginContainer")
 @onready var stat_placeholder = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/Placeholder")
