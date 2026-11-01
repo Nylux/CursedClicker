@@ -17,3 +17,5 @@ signal sacrifice_created(amount)
 signal blood_created(amount)
 
 signal corruption_created(amount)
+
+signal data_changed

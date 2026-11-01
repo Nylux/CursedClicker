@@ -8,24 +8,32 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="CursedClicker"
 run/main_scene="uid://bouehet8hlp0g"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="uid://dp2quv6prydwt"
 
 [autoload]
 
 FeaturesGraph="*res://Scripts/features_graph.gd"
 EventBus="*res://Scripts/event_bus.gd"
-GameManager="*res://Scripts/game_manager.gd"
+Utils="*uid://bp20xu4grn3ly"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/yaml/plugin.cfg")
 
 [rendering]
 

@@ -1,6 +1,5 @@
-extends Node
+class_name AltarHandler extends Node
 
-class_name AltarHandler
 
 @export var ui: SubViewportContainer
 @export var title: String
@@ -48,12 +47,11 @@ func unlock_stat(index: int) -> void:
 	stat.get_child(1 + 2*index + 1).visible = true
 	stat.get_child(1 + 2*index + 1).text = "Placeholder"
 
-func _on_ui_clicked(element: AnimatedTextureRect) -> void:
+func _on_ui_clicked(element: AnimatedTextureRect, gs: GameState) -> void:
 	if element != animated_texture:
 		return
-	EventBus.sacrifice_created.emit(GameManager.click_multiplier)
+	EventBus.sacrifice_created.emit(gs.click_multiplier)
 
 func _on_cultist_changed(amount: int) -> void:
 	if amount >= 1:
 		FeaturesGraph.unlock_node(FeaturesGraph.altar)
-		EventBus.cultist_changed.disconnect(_on_cultist_changed)

@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://i2c05e63otl8"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://i2c05e63otl8"]
 
 [ext_resource type="Texture2D" uid="uid://bo4affpxq7pdq" path="res://Assets/rituals-Sheet.png" id="1_nrfeu"]
 
@@ -54,7 +54,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rfjv2")
 }],
-"loop": false,
+"loop": 0,
 "name": &"default",
 "speed": 5.0
 }]
