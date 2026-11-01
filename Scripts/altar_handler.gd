@@ -54,6 +54,6 @@ func _on_ui_clicked(element: AnimatedTextureRect) -> void:
 	EventBus.sacrifice_created.emit(GameManager.click_multiplier)
 
 func _on_cultist_changed(amount: int) -> void:
-	if amount == 1:
+	if amount >= 1:
 		FeaturesGraph.unlock_node(FeaturesGraph.altar)
 		EventBus.cultist_changed.disconnect(_on_cultist_changed)

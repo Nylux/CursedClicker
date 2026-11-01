@@ -50,7 +50,7 @@ func unlock_stat(index: int) -> void:
 func unlock_button(index: int) -> void:
 	var btn: Button = upgrade_container.get_child(index)
 	btn.visible = true
-	
+
 	match index:
 		0:
 			btn.text = "rituals improve click"

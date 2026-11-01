@@ -30,6 +30,7 @@ func _on_cultist_sacrificied(amount: int):
 	var sacrificied_amout: int = min(amount, current_cultist)
 	current_cultist -= sacrificied_amout
 	EventBus.blood_created.emit(sacrificied_amout)
+	EventBus.cultist_changed.emit(current_cultist)
 	update_ui()
 
 func update_ui() -> void:
