@@ -21,7 +21,6 @@ config/icon="uid://dp2quv6prydwt"
 
 [autoload]
 
-FeaturesGraph="*res://Scripts/features_graph.gd"
 EventBus="*res://Scripts/event_bus.gd"
 Utils="*uid://bp20xu4grn3ly"
 
@@ -33,7 +32,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/yaml/plugin.cfg")
+enabled=PackedStringArray()
 
 [rendering]
 

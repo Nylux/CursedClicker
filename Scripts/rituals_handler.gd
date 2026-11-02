@@ -21,35 +21,35 @@ var game_state: GameState
 
 func _ready() -> void:
 	# unlock rituals at start
-	FeaturesGraph.rituals.connect_unlocked(func():
+	FeaturesNode.rituals.connect_unlocked(func():
 		ui.visible = true
 		ui_placeholder.visible = false)
-	FeaturesGraph.rituals_stat.connect_unlocked(unlock_title)
-	FeaturesGraph.rituals_stat_power.connect_unlocked(func():
+	FeaturesNode.rituals_stat.connect_unlocked(unlock_title)
+	FeaturesNode.rituals_stat_power.connect_unlocked(func():
 		unlock_stat()
 		unlock_button())
-	FeaturesGraph.rituals_improve_click1.connect_unlocked(func():
+	FeaturesNode.rituals_improve_click1.connect_unlocked(func():
 		click_power_add(0.25)
 		unlock_button()
 	)
-	FeaturesGraph.rituals_improve_click2.connect_unlocked(func():
+	FeaturesNode.rituals_improve_click2.connect_unlocked(func():
 		click_power_add(0.25)
 		unlock_button()
 	)
-	FeaturesGraph.rituals_improve_click3.connect_unlocked(func():
+	FeaturesNode.rituals_improve_click3.connect_unlocked(func():
 		click_power_add(0.25)
 		unlock_button()
 	)
-	FeaturesGraph.rituals_improve_click4.connect_unlocked(func():
+	FeaturesNode.rituals_improve_click4.connect_unlocked(func():
 		click_power_add(0.25)
 		unlock_button()
 	)
-	FeaturesGraph.rituals_improve_click5.connect_unlocked(func():
+	FeaturesNode.rituals_improve_click5.connect_unlocked(func():
 		click_power_add(0.25)
 		unlock_button()
 	)
 
-	FeaturesGraph.unlock_node(FeaturesGraph.rituals)
+	GameApi.unlock_node(game_state, FeaturesNode.rituals)
 	# setup ui elements
 	ui.title_node.text = title
 	ui.animated_texture.setup(sprites)
@@ -88,15 +88,15 @@ func unlock_button() -> void:
 
 	match unlock_index:
 		0:
-			btn.pressed.connect(func(): FeaturesGraph.unlock_node(FeaturesGraph.rituals_improve_click1))
+			btn.pressed.connect(func(): GameApi.unlock_node(game_state, FeaturesNode.rituals_improve_click1))
 		1:
-			btn.pressed.connect(func(): FeaturesGraph.unlock_node(FeaturesGraph.rituals_improve_click2))
+			btn.pressed.connect(func(): GameApi.unlock_node(game_state, FeaturesNode.rituals_improve_click2))
 		2:
-			btn.pressed.connect(func(): FeaturesGraph.unlock_node(FeaturesGraph.rituals_improve_click3))
+			btn.pressed.connect(func(): GameApi.unlock_node(game_state, FeaturesNode.rituals_improve_click3))
 		3:
-			btn.pressed.connect(func(): FeaturesGraph.unlock_node(FeaturesGraph.rituals_improve_click4))
+			btn.pressed.connect(func(): GameApi.unlock_node(game_state, FeaturesNode.rituals_improve_click4))
 		4:
-			btn.pressed.connect(func(): FeaturesGraph.unlock_node(FeaturesGraph.rituals_improve_click5))
+			btn.pressed.connect(func(): GameApi.unlock_node(game_state, FeaturesNode.rituals_improve_click5))
 		_:
 			push_error("hihi")
 

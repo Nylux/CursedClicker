@@ -37,7 +37,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_F12:
-			FeaturesGraph.unlock_next_node()
+			GameApi.unlock_next_node(game_state)
 
 
 func _on_button_group_pressed(button: Button, gs: GameState) -> void:

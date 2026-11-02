@@ -10,7 +10,7 @@ var stat_amount: int = 1
 var game_state: GameState
 
 func _ready() -> void:
-	FeaturesGraph.altar.connect_unlocked(func():
+	FeaturesNode.altar.connect_unlocked(func():
 		ui.visible = true
 		ui_placeholder.visible = false)
 	ui.title_node.text = title

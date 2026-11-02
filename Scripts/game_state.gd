@@ -17,6 +17,7 @@ var current_zealot: int
 var current_infiltrator: int
 
 # game values
+var features: UnlockableGraph
 var click_multiplier: int
 
 signal cultist_created(amount)
@@ -38,9 +39,9 @@ func _on_blood_created(amount: int):
 	current_blood += amount
 	total_blood += amount
 	if total_blood >= 1:
-		FeaturesGraph.unlock_node(FeaturesGraph.rituals_stat)
+		GameApi.unlock_node(self, FeaturesNode.rituals_stat)
 	if total_blood >= 5:
-		FeaturesGraph.unlock_node(FeaturesGraph.rituals_stat_power)
+		GameApi.unlock_node(self, FeaturesNode.rituals_stat_power)
 
 	EventBus.data_changed.emit()
 
@@ -60,7 +61,7 @@ func _on_cultist_created(amount: int):
 	total_cultist += amount
 
 	if total_cultist:
-		FeaturesGraph.unlock_node(FeaturesGraph.altar)
+		GameApi.unlock_node(self, FeaturesNode.altar)
 
 	EventBus.data_changed.emit()
 
@@ -89,4 +90,10 @@ func reset() -> void:
 	current_infiltrator = 0
 
 	click_multiplier = 1
+
+	features = UnlockableGraph.new()
+	for n: UnlockableNode in FeaturesNode.nodes:
+		n.connect_unlocked(GameApi._on_node_unlocked.bind(n))
+		features.add(n)
+
 	EventBus.data_changed.emit()
