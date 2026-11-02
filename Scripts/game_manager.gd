@@ -14,6 +14,13 @@ func _ready() -> void:
 	# links between data and ui
 	game_ui.button_group.pressed.connect(_on_button_group_pressed.bind(game_state))
 
+	var ritual = RitualsHandler.new()
+	ritual.ui = Utils.get_component(self, "TemplateUi")
+	ritual.title = "Ritual"
+	ritual.game_state = game_state
+	ritual.sprites = load("res://pentagram_animation.tres")
+	add_child(ritual)
+
 	var altar = AltarHandler.new()
 	altar.ui = Utils.get_component(self, "TemplateUi2")
 	altar.title = "Altar"

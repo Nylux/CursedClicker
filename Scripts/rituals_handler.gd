@@ -13,6 +13,11 @@ var current_power: float = 0.0
 @export var stat_amount: int = 1
 @export var button_amount: int = 1
 
+var stat_index: int = 0
+var unlock_index: int = 0
+
+var game_state: GameState
+
 func _ready() -> void:
 	# unlock rituals at start
 	FeaturesGraph.unlock_node(FeaturesGraph.rituals)
@@ -31,29 +36,42 @@ func unlock_title() -> void:
 	var stat = ui.stat_container.get_node("Statistics")
 	stat.get_child(0).visible = true
 
-func unlock_stat(index: int) -> void:
+func unlock_stat() -> void:
 	var stat = ui.stat_container.get_node("Statistics")
-	stat.get_child(1 + 2*index).visible = false
-	var lbl: Label = stat.get_child(1 + 2*index + 1)
+	stat.get_child(1 + 2*stat_index).visible = false
+	var lbl: Label = stat.get_child(1 + 2*stat_index + 1)
 	lbl.visible = true
 
-	match index:
+	match stat_index:
 		0:
 			lbl.text = "Click Power: %s" % click_power
 			click_power_changed.connect(_on_stat1_changed.bind(lbl))
 		_:
 			push_error("hihi")
 
-func unlock_button(index: int) -> void:
-	var btn: Button = ui.upgrade_container.get_child(index)
-	btn.visible = true
+	stat_index += 1
 
-	match index:
+
+func unlock_button() -> void:
+	var btn: Button = ui.upgrade_container.get_child(0)
+	btn.visible = true
+	btn.text = "rituals improve click"
+
+	match unlock_index:
 		0:
-			btn.text = "rituals improve click"
-			btn.pressed.connect(_on_button1_pressed.bind(btn))
+			btn.pressed.connect(func(): FeaturesGraph.unlock_node(FeaturesGraph.rituals_improve_click1))
+		1:
+			btn.pressed.connect(func(): FeaturesGraph.unlock_node(FeaturesGraph.rituals_improve_click2))
+		2:
+			btn.pressed.connect(func(): FeaturesGraph.unlock_node(FeaturesGraph.rituals_improve_click3))
+		3:
+			btn.pressed.connect(func(): FeaturesGraph.unlock_node(FeaturesGraph.rituals_improve_click4))
+		4:
+			btn.pressed.connect(func(): FeaturesGraph.unlock_node(FeaturesGraph.rituals_improve_click5))
 		_:
 			push_error("hihi")
+
+	unlock_index += 1
 
 func _on_ui_clicked(element: AnimatedTextureRect) -> void:
 	if element != ui.animated_texture:
@@ -65,17 +83,11 @@ func _on_ui_clicked(element: AnimatedTextureRect) -> void:
 		ui.animated_texture.set_next_frame()
 
 func _on_complete_circle() -> void:
-	EventBus.cultist_created.emit(1)
+	game_state.cultist_created.emit(1)
 
 func click_power_add(amount: float):
 	click_power += amount
 	click_power_changed.emit(click_power)
-
-func _on_button1_pressed(btn: Button): 
-	FeaturesGraph.rituals_improve_click1.connect_unlocked(
-		func(): btn.visible = false
-	)
-	FeaturesGraph.unlock_node(FeaturesGraph.rituals_improve_click1)
 
 func _on_stat1_changed(value: float, lbl: Label):
 	lbl.text = "Click Power: %s" % value

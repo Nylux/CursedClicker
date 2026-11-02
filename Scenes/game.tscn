@@ -8,8 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://cstvgkvy5qax2" path="res://Assets/zealot.png" id="5_nnt18"]
 [ext_resource type="Texture2D" uid="uid://b7feg4nnncxkf" path="res://Assets/blood.png" id="5_rfjv2"]
 [ext_resource type="PackedScene" uid="uid://d1se5bk828m00" path="res://Scenes/template_ui.tscn" id="5_wowpa"]
-[ext_resource type="SpriteFrames" uid="uid://i2c05e63otl8" path="res://pentagram_animation.tres" id="6_i6g32"]
-[ext_resource type="Script" uid="uid://dfgstesvf663q" path="res://Scripts/rituals_handler.gd" id="7_1l0tm"]
 [ext_resource type="Texture2D" uid="uid://j03r7sj7utxy" path="res://Assets/infiltrator.png" id="7_ewbju"]
 [ext_resource type="Script" uid="uid://bjwtahrmhgmwv" path="res://Scripts/progression_handler.gd" id="8_v158k"]
 
@@ -296,12 +294,6 @@ layout_mode = 2
 
 [node name="ProgressionHandler" type="Node" parent="." unique_id=1469058872]
 script = ExtResource("8_v158k")
-
-[node name="RitualsHandler" type="Node" parent="." unique_id=1958424103 node_paths=PackedStringArray("ui")]
-script = ExtResource("7_1l0tm")
-ui = NodePath("../CanvasLayer/VBoxContainer/GridContainer/TemplateUi")
-title = "Rituals"
-sprites = ExtResource("6_i6g32")
 
 [editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUi"]
 [editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2"]
