@@ -7,6 +7,10 @@ static func unlock_next_node(gs: GameState) -> void:
 static func unlock_node(gs: GameState, node: UnlockableNode) -> void:
 	gs.features.unlock(node)
 
+static func try_unlock_node(gs: GameState, node: UnlockableNode) -> void:
+	if gs.features.is_unlockable(node):
+		gs.features.unlock(node)
+
 static func _on_node_unlocked(node: UnlockableNode) -> void:
 	print("%s is unlocked" % node)
 

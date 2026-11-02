@@ -49,7 +49,7 @@ func _ready() -> void:
 		unlock_button()
 	)
 
-	GameApi.unlock_node(game_state, FeaturesNode.rituals)
+	GameApi.try_unlock_node(game_state, FeaturesNode.rituals)
 	# setup ui elements
 	ui.title_node.text = title
 	ui.animated_texture.setup(sprites)
@@ -62,13 +62,11 @@ func _ready() -> void:
 	FeaturesUtils.create_upgrades_button(ui.upgrade_container, button_amount)
 
 func unlock_title() -> void:
-	var stat = ui.stat_container.get_node("Statistics")
-	stat.get_child(0).visible = true
+	ui.stat.get_child(0).visible = true
 
 func unlock_stat() -> void:
-	var stat = ui.stat_container.get_node("Statistics")
-	stat.get_child(1 + 2*stat_index).visible = false
-	var lbl: Label = stat.get_child(1 + 2*stat_index + 1)
+	ui.stat.get_child(1 + 2*stat_index).visible = false
+	var lbl: Label = ui.stat.get_child(1 + 2*stat_index + 1)
 	lbl.visible = true
 
 	match stat_index:
@@ -88,15 +86,15 @@ func unlock_button() -> void:
 
 	match unlock_index:
 		0:
-			btn.pressed.connect(func(): GameApi.unlock_node(game_state, FeaturesNode.rituals_improve_click1))
+			btn.pressed.connect(func(): GameApi.try_unlock_node(game_state, FeaturesNode.rituals_improve_click1))
 		1:
-			btn.pressed.connect(func(): GameApi.unlock_node(game_state, FeaturesNode.rituals_improve_click2))
+			btn.pressed.connect(func(): GameApi.try_unlock_node(game_state, FeaturesNode.rituals_improve_click2))
 		2:
-			btn.pressed.connect(func(): GameApi.unlock_node(game_state, FeaturesNode.rituals_improve_click3))
+			btn.pressed.connect(func(): GameApi.try_unlock_node(game_state, FeaturesNode.rituals_improve_click3))
 		3:
-			btn.pressed.connect(func(): GameApi.unlock_node(game_state, FeaturesNode.rituals_improve_click4))
+			btn.pressed.connect(func(): GameApi.try_unlock_node(game_state, FeaturesNode.rituals_improve_click4))
 		4:
-			btn.pressed.connect(func(): GameApi.unlock_node(game_state, FeaturesNode.rituals_improve_click5))
+			btn.pressed.connect(func(): GameApi.try_unlock_node(game_state, FeaturesNode.rituals_improve_click5))
 		_:
 			push_error("hihi")
 

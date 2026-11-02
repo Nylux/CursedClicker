@@ -51,4 +51,4 @@ func unlock_stat(index: int) -> void:
 func _on_ui_clicked(element: AnimatedTextureRect) -> void:
 	if element != ui.animated_texture:
 		return
-	game_state.sacrifice_created.emit(game_state.click_multiplier)
+	game_state.cultist_sacrificied(game_state.click_multiplier)

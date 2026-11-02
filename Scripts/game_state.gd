@@ -30,9 +30,9 @@ func blood_created(amount: int):
 	current_blood += amount
 	total_blood += amount
 	if total_blood >= 1:
-		GameApi.unlock_node(self, FeaturesNode.rituals_stat)
+		GameApi.try_unlock_node(self, FeaturesNode.rituals_stat)
 	if total_blood >= 5:
-		GameApi.unlock_node(self, FeaturesNode.rituals_stat_power)
+		GameApi.try_unlock_node(self, FeaturesNode.rituals_stat_power)
 
 	EventBus.data_changed.emit()
 
@@ -52,7 +52,7 @@ func cultist_created(amount: int):
 	total_cultist += amount
 
 	if total_cultist:
-		GameApi.unlock_node(self, FeaturesNode.altar)
+		GameApi.try_unlock_node(self, FeaturesNode.altar)
 
 	EventBus.data_changed.emit()
 
