@@ -15,7 +15,7 @@ var current_infiltrator: int
 # game values
 var click_multiplier: int
 
-func _ready() -> void:
+func _init() -> void:
 	reset()
 	EventBus.blood_created.connect(_on_blood_created)
 	EventBus.corruption_created.connect(_on_corruption_created)

@@ -14,6 +14,13 @@ func _ready() -> void:
 	# links between data and ui
 	game_ui.button_group.pressed.connect(_on_button_group_pressed.bind(game_state))
 
+	var altar = AltarHandler.new()
+	altar.ui = Utils.get_component(self, "TemplateUi2")
+	altar.title = "Altar"
+	altar.game_state = game_state
+	altar.sprites = load("res://altar_animation.tres")
+	add_child(altar)
+
 	# first update
 	EventBus.data_changed.emit()
 
@@ -34,4 +41,3 @@ func _on_button_group_pressed(button: Button, gs: GameState) -> void:
 			gs.click_multiplier = 100
 		"ButtonTimes1000":
 			gs.click_multiplier = 1000
-	

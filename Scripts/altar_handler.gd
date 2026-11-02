@@ -1,57 +1,56 @@
 class_name AltarHandler extends Node
 
 
-@export var ui: SubViewportContainer
-@export var title: String
-@onready var tilte_node = ui.get_node("SubViewport/Panel/VBoxContainer/MarginContainer/Title")
-@onready var animated_texture: AnimatedTextureRect = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer/TextureRect")
-@onready var stat_container = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/MarginContainer")
-@onready var stat_placeholder = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/Placeholder")
-@onready var stat = stat_container.get_node("Statistics")
+var ui: TemplateUI
+var title: String
+var sprites: SpriteFrames
+var stat_amount: int = 1
 
-@export var stat_amount: int = 1
+var game_state: GameState
 
 func _ready() -> void:
+	ui.title_node.text = title
+	ui.animated_texture.setup(sprites)
 	EventBus.cultist_changed.connect(_on_cultist_changed)
-	# setup ui elements
-	tilte_node.text = title
 	EventBus.clicked.connect(_on_ui_clicked)
 
 func create_stats():
-	stat_container.visible = true
+	ui.stat_container.visible = true
 	
 	# title for stats
 	var stat_title = Label.new()
 	stat_title.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	stat_title.text = "Statistics"
-	stat.add_child(stat_title)
+	ui.stat.add_child(stat_title)
 
 	# stats elements
 	for i in stat_amount:
 		var placeholder = Control.new()
 		placeholder.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		stat.add_child(placeholder)
+		ui.stat.add_child(placeholder)
 
 		var label = Label.new()
 		label.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		label.text = "Lorem Ipsum"
 		label.visible = false
-		stat.add_child(label)
+		ui.stat.add_child(label)
 
-	stat_placeholder.visible = false
+	ui.stat_placeholder.visible = false
 
 func unlock_stat(index: int) -> void:
 	if index >= stat_amount:
 		return
-	stat.get_child(1 + 2*index).visible = false
-	stat.get_child(1 + 2*index + 1).visible = true
-	stat.get_child(1 + 2*index + 1).text = "Placeholder"
-
-func _on_ui_clicked(element: AnimatedTextureRect, gs: GameState) -> void:
-	if element != animated_texture:
-		return
-	EventBus.sacrifice_created.emit(gs.click_multiplier)
+	ui.stat.get_child(1 + 2*index).visible = false
+	ui.stat.get_child(1 + 2*index + 1).visible = true
+	ui.stat.get_child(1 + 2*index + 1).text = "Placeholder"
 
 func _on_cultist_changed(amount: int) -> void:
 	if amount >= 1:
 		FeaturesGraph.unlock_node(FeaturesGraph.altar)
+		EventBus.cultist_changed.disconnect(_on_cultist_changed)
+
+
+func _on_ui_clicked(element: AnimatedTextureRect) -> void:
+	if element != ui.animated_texture:
+		return
+	EventBus.sacrifice_created.emit(game_state.click_multiplier)

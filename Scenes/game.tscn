@@ -11,10 +11,7 @@
 [ext_resource type="SpriteFrames" uid="uid://i2c05e63otl8" path="res://pentagram_animation.tres" id="6_i6g32"]
 [ext_resource type="Script" uid="uid://dfgstesvf663q" path="res://Scripts/rituals_handler.gd" id="7_1l0tm"]
 [ext_resource type="Texture2D" uid="uid://j03r7sj7utxy" path="res://Assets/infiltrator.png" id="7_ewbju"]
-[ext_resource type="SpriteFrames" uid="uid://c5rxorjum05hs" path="res://altar_animation.tres" id="7_rku1e"]
 [ext_resource type="Script" uid="uid://bjwtahrmhgmwv" path="res://Scripts/progression_handler.gd" id="8_v158k"]
-[ext_resource type="Script" uid="uid://duoc0467vgjk7" path="res://Scripts/cultist_handler.gd" id="9_h4fw4"]
-[ext_resource type="Script" uid="uid://d3d1bjiaxakg6" path="res://Scripts/altar_handler.gd" id="11_o5yvi"]
 
 [node name="Game" type="Node" unique_id=1247645737]
 script = ExtResource("1_ebmjs")
@@ -221,11 +218,8 @@ size_flags_vertical = 3
 visible = false
 layout_mode = 2
 
-[node name="SubViewport" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi" index="0"]
+[node name="SubViewport" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi" index="0" unique_id=1562223692]
 render_target_update_mode = 0
-
-[node name="TextureRect" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi/SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer" index="0"]
-sprites = ExtResource("6_i6g32")
 
 [node name="Control2" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=680171498]
 custom_minimum_size = Vector2(480, 480)
@@ -237,11 +231,8 @@ size_flags_vertical = 3
 visible = false
 layout_mode = 2
 
-[node name="SubViewport" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2" index="0"]
+[node name="SubViewport" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2" index="0" unique_id=1562223692]
 render_target_update_mode = 0
-
-[node name="TextureRect" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2/SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer" index="0"]
-sprites = ExtResource("7_rku1e")
 
 [node name="Control3" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=50482749]
 custom_minimum_size = Vector2(480, 480)
@@ -306,18 +297,11 @@ layout_mode = 2
 [node name="ProgressionHandler" type="Node" parent="." unique_id=1469058872]
 script = ExtResource("8_v158k")
 
-[node name="CultistHandler" type="Node" parent="." unique_id=1394413523]
-script = ExtResource("9_h4fw4")
-
 [node name="RitualsHandler" type="Node" parent="." unique_id=1958424103 node_paths=PackedStringArray("ui")]
 script = ExtResource("7_1l0tm")
 ui = NodePath("../CanvasLayer/VBoxContainer/GridContainer/TemplateUi")
 title = "Rituals"
-
-[node name="AltarHandler" type="Node" parent="." unique_id=931537890 node_paths=PackedStringArray("ui")]
-script = ExtResource("11_o5yvi")
-ui = NodePath("../CanvasLayer/VBoxContainer/GridContainer/TemplateUi2")
-title = "Altar"
+sprites = ExtResource("6_i6g32")
 
 [editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUi"]
 [editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2"]

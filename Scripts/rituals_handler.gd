@@ -4,13 +4,9 @@ class_name RitualsHandler
 
 signal click_power_changed(value)
 
-@export var ui: SubViewportContainer
+@export var ui: TemplateUI
 @export var title: String
-@onready var tilte_node = ui.get_node("SubViewport/Panel/VBoxContainer/MarginContainer/Title")
-@onready var animated_texture: AnimatedTextureRect = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/VBoxContainer/TextureRect")
-@onready var stat_container = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/MarginContainer")
-@onready var stat_placeholder = ui.get_node("SubViewport/Panel/VBoxContainer/HBoxContainer/Placeholder")
-@onready var upgrade_container = ui.get_node("SubViewport/Panel/VBoxContainer/Upgrades/MarginContainer/GridContainer")
+@export var sprites: SpriteFrames
 
 var click_power: float = 0.5
 var current_power: float = 0.0
@@ -21,21 +17,22 @@ func _ready() -> void:
 	# unlock rituals at start
 	FeaturesGraph.unlock_node(FeaturesGraph.rituals)
 	# setup ui elements
-	tilte_node.text = title
+	ui.title_node.text = title
+	ui.animated_texture.setup(sprites)
+	ui.animated_texture.complete_circle.connect(_on_complete_circle)
 	EventBus.clicked.connect(_on_ui_clicked)
-	animated_texture.complete_circle.connect(_on_complete_circle)
 
 	# setup internal logic
 	current_power = 0.0
-	FeaturesUtils.create_stats(stat_container, stat_placeholder, stat_amount)
-	FeaturesUtils.create_upgrades_button(upgrade_container, button_amount)
+	FeaturesUtils.create_stats(ui.stat_container, ui.stat_placeholder, stat_amount)
+	FeaturesUtils.create_upgrades_button(ui.upgrade_container, button_amount)
 
 func unlock_title() -> void:
-	var stat = stat_container.get_node("Statistics")
+	var stat = ui.stat_container.get_node("Statistics")
 	stat.get_child(0).visible = true
 
 func unlock_stat(index: int) -> void:
-	var stat = stat_container.get_node("Statistics")
+	var stat = ui.stat_container.get_node("Statistics")
 	stat.get_child(1 + 2*index).visible = false
 	var lbl: Label = stat.get_child(1 + 2*index + 1)
 	lbl.visible = true
@@ -48,7 +45,7 @@ func unlock_stat(index: int) -> void:
 			push_error("hihi")
 
 func unlock_button(index: int) -> void:
-	var btn: Button = upgrade_container.get_child(index)
+	var btn: Button = ui.upgrade_container.get_child(index)
 	btn.visible = true
 
 	match index:
@@ -59,13 +56,13 @@ func unlock_button(index: int) -> void:
 			push_error("hihi")
 
 func _on_ui_clicked(element: AnimatedTextureRect) -> void:
-	if element != animated_texture:
+	if element != ui.animated_texture:
 		return
 
 	current_power += click_power
 	while current_power >= 1.0:
 		current_power -= 1.0
-		animated_texture.set_next_frame()
+		ui.animated_texture.set_next_frame()
 
 func _on_complete_circle() -> void:
 	EventBus.cultist_created.emit(1)
