@@ -20,21 +20,12 @@ var current_infiltrator: int
 var features: UnlockableGraph
 var click_multiplier: int
 
-signal cultist_created(amount)
-signal sacrifice_created(amount)
-signal blood_created(amount)
-signal corruption_created(amount)
-
 
 func _init() -> void:
 	reset()
-	blood_created.connect(_on_blood_created)
-	corruption_created.connect(_on_corruption_created)
-	cultist_created.connect(_on_cultist_created)
-	sacrifice_created.connect(_on_cultist_sacrificied)
 
 
-func _on_blood_created(amount: int):
+func blood_created(amount: int):
 	assert(amount >= 0)
 	current_blood += amount
 	total_blood += amount
@@ -46,7 +37,7 @@ func _on_blood_created(amount: int):
 	EventBus.data_changed.emit()
 
 
-func _on_corruption_created(amount: int):
+func corruption_created(amount: int):
 	assert(amount >= 0)
 	current_corruption += amount
 	total_corruption += amount
@@ -54,7 +45,7 @@ func _on_corruption_created(amount: int):
 	EventBus.data_changed.emit()
 
 
-func _on_cultist_created(amount: int):
+func cultist_created(amount: int):
 	assert(amount >= 0)
 	current_population -= amount
 	current_cultist += amount
@@ -66,12 +57,12 @@ func _on_cultist_created(amount: int):
 	EventBus.data_changed.emit()
 
 
-func _on_cultist_sacrificied(amount: int):
+func cultist_sacrificied(amount: int):
 	assert(amount >= 0)
 	var sacrificied_amout: int = min(amount, current_cultist)
 	current_cultist -= sacrificied_amout
 
-	blood_created.emit(sacrificied_amout)
+	blood_created(sacrificied_amout)
 	EventBus.data_changed.emit()
 
 
