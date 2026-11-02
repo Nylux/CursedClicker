@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://b7feg4nnncxkf" path="res://Assets/blood.png" id="5_rfjv2"]
 [ext_resource type="PackedScene" uid="uid://d1se5bk828m00" path="res://Scenes/template_ui.tscn" id="5_wowpa"]
 [ext_resource type="Texture2D" uid="uid://j03r7sj7utxy" path="res://Assets/infiltrator.png" id="7_ewbju"]
-[ext_resource type="Script" uid="uid://bjwtahrmhgmwv" path="res://Scripts/progression_handler.gd" id="8_v158k"]
 
 [node name="Game" type="Node" unique_id=1247645737]
 script = ExtResource("1_ebmjs")
@@ -206,30 +205,30 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 4
 
-[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=1054529193]
+[node name="PlaceholderUI0" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=1054529193]
 custom_minimum_size = Vector2(480, 480)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TemplateUi" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=1197592818 instance=ExtResource("5_wowpa")]
+[node name="TemplateUI0" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=1197592818 instance=ExtResource("5_wowpa")]
 visible = false
 layout_mode = 2
 
-[node name="SubViewport" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi" index="0" unique_id=1562223692]
+[node name="SubViewport" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUI0" index="0" unique_id=1562223692]
 render_target_update_mode = 0
 
-[node name="Control2" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=680171498]
+[node name="PlaceholderUI1" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=680171498]
 custom_minimum_size = Vector2(480, 480)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TemplateUi2" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=430779798 instance=ExtResource("5_wowpa")]
+[node name="TemplateUI1" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=430779798 instance=ExtResource("5_wowpa")]
 visible = false
 layout_mode = 2
 
-[node name="SubViewport" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2" index="0" unique_id=1562223692]
+[node name="SubViewport" parent="CanvasLayer/VBoxContainer/GridContainer/TemplateUI1" index="0" unique_id=1562223692]
 render_target_update_mode = 0
 
 [node name="Control3" type="Control" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=50482749]
@@ -292,8 +291,5 @@ size_flags_vertical = 3
 visible = false
 layout_mode = 2
 
-[node name="ProgressionHandler" type="Node" parent="." unique_id=1469058872]
-script = ExtResource("8_v158k")
-
-[editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUi"]
-[editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUi2"]
+[editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUI0"]
+[editable path="CanvasLayer/VBoxContainer/GridContainer/TemplateUI1"]

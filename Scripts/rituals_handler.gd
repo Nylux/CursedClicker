@@ -4,14 +4,15 @@ class_name RitualsHandler
 
 signal click_power_changed(value)
 
-@export var ui: TemplateUI
-@export var title: String
-@export var sprites: SpriteFrames
+var ui: TemplateUI
+var title: String
+var sprites: SpriteFrames
+var ui_placeholder: Control
 
 var click_power: float = 0.5
 var current_power: float = 0.0
-@export var stat_amount: int = 1
-@export var button_amount: int = 1
+var stat_amount: int = 1
+var button_amount: int = 1
 
 var stat_index: int = 0
 var unlock_index: int = 0
@@ -20,6 +21,34 @@ var game_state: GameState
 
 func _ready() -> void:
 	# unlock rituals at start
+	FeaturesGraph.rituals.connect_unlocked(func():
+		ui.visible = true
+		ui_placeholder.visible = false)
+	FeaturesGraph.rituals_stat.connect_unlocked(unlock_title)
+	FeaturesGraph.rituals_stat_power.connect_unlocked(func():
+		unlock_stat()
+		unlock_button())
+	FeaturesGraph.rituals_improve_click1.connect_unlocked(func():
+		click_power_add(0.25)
+		unlock_button()
+	)
+	FeaturesGraph.rituals_improve_click2.connect_unlocked(func():
+		click_power_add(0.25)
+		unlock_button()
+	)
+	FeaturesGraph.rituals_improve_click3.connect_unlocked(func():
+		click_power_add(0.25)
+		unlock_button()
+	)
+	FeaturesGraph.rituals_improve_click4.connect_unlocked(func():
+		click_power_add(0.25)
+		unlock_button()
+	)
+	FeaturesGraph.rituals_improve_click5.connect_unlocked(func():
+		click_power_add(0.25)
+		unlock_button()
+	)
+
 	FeaturesGraph.unlock_node(FeaturesGraph.rituals)
 	# setup ui elements
 	ui.title_node.text = title

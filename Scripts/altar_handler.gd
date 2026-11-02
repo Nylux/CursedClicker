@@ -4,11 +4,15 @@ class_name AltarHandler extends Node
 var ui: TemplateUI
 var title: String
 var sprites: SpriteFrames
+var ui_placeholder: Control
 var stat_amount: int = 1
 
 var game_state: GameState
 
 func _ready() -> void:
+	FeaturesGraph.altar.connect_unlocked(func():
+		ui.visible = true
+		ui_placeholder.visible = false)
 	ui.title_node.text = title
 	ui.animated_texture.setup(sprites)
 	EventBus.clicked.connect(_on_ui_clicked)

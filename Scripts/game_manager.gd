@@ -15,14 +15,16 @@ func _ready() -> void:
 	game_ui.button_group.pressed.connect(_on_button_group_pressed.bind(game_state))
 
 	var ritual = RitualsHandler.new()
-	ritual.ui = Utils.get_component(self, "TemplateUi")
+	ritual.ui = Utils.get_component(self, "TemplateUI0")
+	ritual.ui_placeholder = Utils.get_component(self, "PlaceholderUI0")
 	ritual.title = "Ritual"
 	ritual.game_state = game_state
 	ritual.sprites = load("res://pentagram_animation.tres")
 	add_child(ritual)
 
 	var altar = AltarHandler.new()
-	altar.ui = Utils.get_component(self, "TemplateUi2")
+	altar.ui = Utils.get_component(self, "TemplateUI1")
+	altar.ui_placeholder = Utils.get_component(self, "PlaceholderUI1")
 	altar.title = "Altar"
 	altar.game_state = game_state
 	altar.sprites = load("res://altar_animation.tres")
