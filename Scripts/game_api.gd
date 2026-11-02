@@ -9,3 +9,6 @@ static func unlock_node(gs: GameState, node: UnlockableNode) -> void:
 
 static func _on_node_unlocked(node: UnlockableNode) -> void:
 	print("%s is unlocked" % node)
+
+static func reset_game(gs: GameState) -> void:
+	gs.reset()

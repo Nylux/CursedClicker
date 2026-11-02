@@ -12,6 +12,8 @@ func _init(name: String, dep: Array[UnlockableNode] = []) -> void:
 	dependencies = dep
 
 func connect_unlocked(c: Callable) -> void:
+	if node_unlocked.is_connected(c):
+		node_unlocked.disconnect(c)
 	node_unlocked.connect(c)
 
 func unlocked() -> void:
