@@ -49,7 +49,6 @@ func _ready() -> void:
 		unlock_button()
 	)
 
-	GameApi.try_unlock_node(game_state, FeaturesNode.rituals)
 	# setup ui elements
 	ui.title_node.text = title
 	ui.animated_texture.setup(sprites)

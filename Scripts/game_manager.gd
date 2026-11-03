@@ -14,23 +14,38 @@ func _ready() -> void:
 	# links between data and ui
 	game_ui.button_group.pressed.connect(_on_button_group_pressed.bind(game_state))
 
-	var ritual = RitualsHandler.new()
-	ritual.ui = Utils.get_component(self, "TemplateUI0")
-	ritual.ui_placeholder = Utils.get_component(self, "PlaceholderUI0")
-	ritual.title = "Ritual"
-	ritual.game_state = game_state
-	ritual.sprites = load("res://pentagram_animation.tres")
+	
+	var ritual = FeaturePanel.new().build(
+		Utils.get_component(self, "TemplateUI0"),
+		Utils.get_component(self, "PlaceholderUI0"),
+		game_state.cultist_sacrificied.bind(game_state.click_multiplier),
+		"Ritual",
+		load("res://pentagram_animation.tres"),
+		game_state,
+	)
+	FeaturesNode.rituals.connect_unlocked(ritual.activate)
+	FeaturesNode.rituals_stat.connect_unlocked(ritual.unlock_title)
+	FeaturesNode.rituals_stat_power.connect_unlocked(ritual.unlock_stat)
+	FeaturesNode.rituals_improve_click1.connect_unlocked(ritual.click_power_add.bind(0.25))
+	FeaturesNode.rituals_improve_click2.connect_unlocked(ritual.click_power_add.bind(0.25))
+	FeaturesNode.rituals_improve_click3.connect_unlocked(ritual.click_power_add.bind(0.25))
+	FeaturesNode.rituals_improve_click4.connect_unlocked(ritual.click_power_add.bind(0.25))
+	FeaturesNode.rituals_improve_click5.connect_unlocked(ritual.click_power_add.bind(0.25))
 	add_child(ritual)
 
-	var altar = AltarHandler.new()
-	altar.ui = Utils.get_component(self, "TemplateUI1")
-	altar.ui_placeholder = Utils.get_component(self, "PlaceholderUI1")
-	altar.title = "Altar"
-	altar.game_state = game_state
-	altar.sprites = load("res://altar_animation.tres")
+	var altar = FeaturePanel.new().build(
+		Utils.get_component(self, "TemplateUI1"),
+		Utils.get_component(self, "PlaceholderUI1"),
+		game_state.cultist_sacrificied.bind(game_state.click_multiplier),
+		"Altar",
+		load("res://altar_animation.tres"),
+		game_state,
+	)
+	FeaturesNode.altar.connect_unlocked(altar.activate)
 	add_child(altar)
 
 	# first update
+	GameApi.try_unlock_node(game_state, FeaturesNode.rituals)
 	EventBus.data_changed.emit()
 
 
