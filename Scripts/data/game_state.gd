@@ -25,7 +25,7 @@ func _init() -> void:
 	reset()
 
 
-func blood_created(amount: int):
+func add_blood(amount: int):
 	assert(amount >= 0)
 	current_blood += amount
 	total_blood += amount
@@ -37,7 +37,7 @@ func blood_created(amount: int):
 	EventBus.data_changed.emit()
 
 
-func corruption_created(amount: int):
+func add_corruption(amount: int):
 	assert(amount >= 0)
 	current_corruption += amount
 	total_corruption += amount
@@ -45,7 +45,7 @@ func corruption_created(amount: int):
 	EventBus.data_changed.emit()
 
 
-func cultist_created(amount: int):
+func add_cultist(amount: int):
 	assert(amount >= 0)
 	current_population -= amount
 	current_cultist += amount
@@ -62,7 +62,7 @@ func cultist_sacrificied(amount: int):
 	var sacrificied_amout: int = min(amount, current_cultist)
 	current_cultist -= sacrificied_amout
 
-	blood_created(sacrificied_amout)
+	add_blood(sacrificied_amout)
 	EventBus.data_changed.emit()
 
 

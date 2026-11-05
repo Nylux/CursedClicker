@@ -109,7 +109,7 @@ func _on_ui_clicked(element: AnimatedTextureRect) -> void:
 		ui.animated_texture.set_next_frame()
 
 func _on_complete_circle() -> void:
-	game_state.cultist_created(1)
+	game_state.add_cultist(1)
 
 func click_power_add(amount: float):
 	click_power += amount
