@@ -1,6 +1,4 @@
-extends RefCounted
-
-class_name FeaturesUtils
+class_name FeaturesUtils extends RefCounted
 
 static func create_stats(container: Control, placeholder: Control, stat_amount: int):
 	container.visible = true
@@ -33,3 +31,18 @@ static func create_upgrades_button(container: Control, button_amount: int) -> vo
 		btn.text = "Lorem Ipsum"
 		btn.visible = false
 		container.add_child(btn)
+
+
+static func unlock_title(ui: TemplateUI) -> void:
+	ui.stat.get_child(0).visible = true
+
+
+static func unlock_stat(ui: TemplateUI, index: int) -> void:
+	ui.stat.get_child(1 + 2*index).visible = false
+	ui.stat.get_child(1 + 2*index + 1).visible = true
+	ui.stat.get_child(1 + 2*index + 1).text = "Placeholder"
+
+
+static func activate(ui: TemplateUI, ui_placeholder: Control) -> void:
+	ui.visible = true
+	ui_placeholder.visible = false

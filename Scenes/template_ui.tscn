@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d1se5bk828m00"]
 
-[ext_resource type="Script" uid="uid://r5s3jo7vwgpp" path="res://scripts/template_ui.gd" id="1_ckvk3"]
+[ext_resource type="Script" uid="uid://r5s3jo7vwgpp" path="res://Scripts/template_ui.gd" id="1_ckvk3"]
 [ext_resource type="Script" uid="uid://lc43le6k2ayf" path="res://Scripts/animated_texture_rect.gd" id="2_ckvk3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4txr"]

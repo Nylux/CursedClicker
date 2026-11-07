@@ -11,7 +11,9 @@ var infiltrator_label: Label
 var button_container: HBoxContainer
 var button_group: ButtonGroup
 
-func _init(p_parent: Node) -> void:
+var ritual_panel: RitualPanel
+
+func _init(p_parent: Node, p_ritual_panel: RitualPanel) -> void:
 	resources_container = Utils.get_component(p_parent, "ResourcesContainer")
 
 	blood_label = Utils.get_component(resources_container, "BloodLabel")
@@ -27,3 +29,5 @@ func _init(p_parent: Node) -> void:
 	Utils.get_component(button_container, "ButtonTimes10").text = "X   10"
 	Utils.get_component(button_container, "ButtonTimes100").text = "X  100"
 	Utils.get_component(button_container, "ButtonTimes1000").text = "X 1000"
+
+	ritual_panel = p_ritual_panel

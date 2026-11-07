@@ -20,6 +20,11 @@ var current_infiltrator: int
 var features: UnlockableGraph
 var click_multiplier: int
 
+# panel data
+var ritual_data: RitualData
+
+# countries data
+var countries: Array[CountryData]
 
 func _init() -> void:
 	reset()
@@ -87,4 +92,14 @@ func reset() -> void:
 		n.connect_unlocked(GameApi._on_node_unlocked.bind(n))
 		features.add(n)
 
+	ritual_data = RitualData.new()
+
+	countries = [
+		CountryData.new("test"),
+		CountryData.new("test2"),
+	]
 	EventBus.data_changed.emit()
+
+
+func set_ritual_workers(amount: int) -> void:
+	ritual_data.set_workers(amount / 100.0)

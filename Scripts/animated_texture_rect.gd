@@ -1,7 +1,6 @@
 # extention of TextureRect to enable animation in a control
-extends TextureRect
+class_name AnimatedTextureRect extends TextureRect
 
-class_name AnimatedTextureRect
 
 signal complete_circle
 
@@ -9,10 +8,12 @@ signal complete_circle
 var current_animation: String = "default"
 var frame_index: int = 0
 
+
 func setup(p_sprites: SpriteFrames) -> void:
 	if p_sprites != null:
 		sprites = p_sprites
 		texture = sprites.get_frame_texture(current_animation, frame_index)
+
 
 func set_next_frame() -> void:
 	if sprites == null:
@@ -25,6 +26,18 @@ func set_next_frame() -> void:
 		frame_index = 0
 	
 	texture = sprites.get_frame_texture(current_animation, frame_index)
+
+
+func set_frame(percent: float) -> void:
+	assert(percent >= 0.)
+	assert(percent <= 1.)
+	if sprites == null:
+		return
+	var frame_count = sprites.get_frame_count(current_animation)
+	frame_index = int(percent * frame_count)
+
+	texture = sprites.get_frame_texture(current_animation, frame_index)
+
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:

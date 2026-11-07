@@ -3,9 +3,25 @@ class_name GameManager extends Node
 var game_state: GameState
 var game_ui: GameUI
 
+var ritual_timer: Timer
+
 func _ready() -> void:
 	game_state = GameState.new()
-	game_ui = GameUI.new(self)
+
+	var ritual = RitualPanel.new(
+		Utils.get_component(self, "TemplateUI0"),
+		Utils.get_component(self, "PlaceholderUI0"),
+		"Ritual",
+		load("res://pentagram_animation.tres"),
+	)
+	add_child(ritual)
+
+	ritual_timer = Timer.new()
+	ritual_timer.timeout.connect(func(): game_state.ritual_data.progress(game_state))
+	add_child(ritual_timer)
+	ritual_timer.start(1.)
+
+	game_ui = GameUI.new(self, ritual)
 
 	# it binds a state to an autoload, code smell if game is restarted
 	# TODO: handle it better
@@ -13,36 +29,8 @@ func _ready() -> void:
 
 	# links between data and ui
 	game_ui.button_group.pressed.connect(_on_button_group_pressed.bind(game_state))
-
-	
-	var ritual = FeaturePanel.new().build(
-		Utils.get_component(self, "TemplateUI0"),
-		Utils.get_component(self, "PlaceholderUI0"),
-		game_state.cultist_sacrificied.bind(game_state.click_multiplier),
-		"Ritual",
-		load("res://pentagram_animation.tres"),
-		game_state,
-	)
-	FeaturesNode.rituals.connect_unlocked(ritual.activate)
-	FeaturesNode.rituals_stat.connect_unlocked(ritual.unlock_title)
-	FeaturesNode.rituals_stat_power.connect_unlocked(ritual.unlock_stat)
-	FeaturesNode.rituals_improve_click1.connect_unlocked(ritual.click_power_add.bind(0.25))
-	FeaturesNode.rituals_improve_click2.connect_unlocked(ritual.click_power_add.bind(0.25))
-	FeaturesNode.rituals_improve_click3.connect_unlocked(ritual.click_power_add.bind(0.25))
-	FeaturesNode.rituals_improve_click4.connect_unlocked(ritual.click_power_add.bind(0.25))
-	FeaturesNode.rituals_improve_click5.connect_unlocked(ritual.click_power_add.bind(0.25))
-	add_child(ritual)
-
-	var altar = FeaturePanel.new().build(
-		Utils.get_component(self, "TemplateUI1"),
-		Utils.get_component(self, "PlaceholderUI1"),
-		game_state.cultist_sacrificied.bind(game_state.click_multiplier),
-		"Altar",
-		load("res://altar_animation.tres"),
-		game_state,
-	)
-	FeaturesNode.altar.connect_unlocked(altar.activate)
-	add_child(altar)
+	game_ui.ritual_panel.worker_slider.value_changed.connect(game_state.set_ritual_workers)
+	game_ui.ritual_panel.worker_slider.value_changed.connect(func(_value: float): EventBus.data_changed.emit())
 
 	# first update
 	GameApi.try_unlock_node(game_state, FeaturesNode.rituals)
