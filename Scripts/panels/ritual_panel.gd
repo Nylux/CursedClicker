@@ -40,7 +40,6 @@ func _ready() -> void:
 	ui.upgrade_container.add_child(worker_slider)
 
 
-func resolve_ui(cur_cultist: int, data: RitualData) -> void:
-	worker_label.text = "Workers: %s" % data.get_workers(cur_cultist)
+func resolve_ui(workers: int, data: RitualData) -> void:
+	worker_label.text = "Workers: %s" % workers
 	ui.animated_texture.set_frame(data.cur_progress)
-

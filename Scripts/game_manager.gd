@@ -17,7 +17,7 @@ func _ready() -> void:
 	add_child(ritual)
 
 	ritual_timer = Timer.new()
-	ritual_timer.timeout.connect(func(): game_state.ritual_data.progress(game_state))
+	ritual_timer.timeout.connect(game_state.progress_ritual)
 	add_child(ritual_timer)
 	ritual_timer.start(1.)
 

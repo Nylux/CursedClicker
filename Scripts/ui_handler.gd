@@ -9,4 +9,4 @@ static func resolve_ui(game_state: GameState, game_ui: GameUI) -> void:
 	game_ui.zealot_label.text = "%s" % game_state.current_zealot
 	game_ui.infiltrator_label.text = "%s" % game_state.current_infiltrator
 
-	game_ui.ritual_panel.resolve_ui(game_state.current_cultist, game_state.ritual_data)
+	game_ui.ritual_panel.resolve_ui(game_state.get_ritual_workers(), game_state.ritual_data)

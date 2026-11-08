@@ -16,6 +16,13 @@ var current_cultist: int
 var current_zealot: int
 var current_infiltrator: int
 
+var ritual_workers: float
+
+var faith: GameData.StatLevel
+var discipline: GameData.StatLevel
+var moral: GameData.StatLevel
+var knowledge: GameData.StatLevel
+
 # game values
 var features: UnlockableGraph
 var click_multiplier: int
@@ -81,7 +88,7 @@ func reset() -> void:
 	current_blood = 0
 	current_corruption = 0
 	current_population = MAX_POPULATION
-	current_cultist = 0
+	current_cultist = 10000
 	current_zealot = 0
 	current_infiltrator = 0
 
@@ -93,6 +100,14 @@ func reset() -> void:
 		features.add(n)
 
 	ritual_data = RitualData.new()
+	ritual_workers = 0.0
+
+	
+	faith = GameData.StatLevel.MID
+	discipline = GameData.StatLevel.MID
+	moral = GameData.StatLevel.MID
+	knowledge = GameData.StatLevel.MID
+
 
 	countries = [
 		CountryData.new("test"),
@@ -102,4 +117,27 @@ func reset() -> void:
 
 
 func set_ritual_workers(amount: int) -> void:
-	ritual_data.set_workers(amount / 100.0)
+	ritual_workers = amount / 100.0
+
+	EventBus.data_changed.emit()
+	# add logic if multiple workers are used to avoid Sum > 1.0
+
+
+func get_ritual_workers() -> int:
+	return int(ritual_workers * current_cultist)
+
+func progress_ritual() -> void:
+	var cultist_to_add = ritual_data.progress(get_ritual_workers())
+	add_cultist(cultist_to_add)
+
+func religious_eff() -> void:
+	return GameData.compute_efficiency(self.faith, self.discipline)
+
+func combat_eff() -> void:
+	return GameData.compute_efficiency(self.discipline, self.moral)
+
+func mental_eff() -> void:
+	return GameData.compute_efficiency(self.moral, self.knowledge)
+
+func research_eff() -> void:
+	return GameData.compute_efficiency(self.knowledge, self.faith)
