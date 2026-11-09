@@ -6,7 +6,7 @@ static var rituals := UnlockableNode.new("rituals")
 static var altar := UnlockableNode.new("altar", [rituals])
 static var expedition := UnlockableNode.new("expedition", [altar])
 static var temple := UnlockableNode.new("temple", [expedition])
-static var infiltration := UnlockableNode.new("infiltration", [temple])
+static var infiltration := UnlockableNode.new("infiltration", [rituals])
 
 ## subfeatures
 static var rituals_stat := UnlockableNode.new("rituals_stat", [rituals])

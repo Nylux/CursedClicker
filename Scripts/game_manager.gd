@@ -16,6 +16,13 @@ func _ready() -> void:
 	)
 	add_child(ritual)
 
+	var infiltration = InfiltrationPanel.new(
+		Utils.get_component(self, "TemplateUI1"),
+		Utils.get_component(self, "PlaceholderUI1"),
+		"Infiltration",
+	)
+	add_child(infiltration)
+
 	ritual_timer = Timer.new()
 	ritual_timer.timeout.connect(game_state.progress_ritual)
 	add_child(ritual_timer)
@@ -34,6 +41,7 @@ func _ready() -> void:
 
 	# first update
 	GameApi.try_unlock_node(game_state, FeaturesNode.rituals)
+	GameApi.try_unlock_node(game_state, FeaturesNode.infiltration)
 	EventBus.data_changed.emit()
 
 

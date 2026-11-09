@@ -9,6 +9,8 @@ content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
 bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 2
+border_width_top = 2
 
 [node name="TemplateUi" type="SubViewportContainer" unique_id=1252452237]
 anchors_preset = 15

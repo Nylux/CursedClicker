@@ -8,6 +8,11 @@ var cultist_label: Label
 var zealot_label: Label
 var infiltrator_label: Label
 
+var faith_label: Label
+var discipline_label: Label
+var moral_label: Label
+var knowledge_label: Label
+
 var button_container: HBoxContainer
 var button_group: ButtonGroup
 
@@ -22,6 +27,11 @@ func _init(p_parent: Node, p_ritual_panel: RitualPanel) -> void:
 	cultist_label = Utils.get_component(resources_container, "CultistLabel")
 	zealot_label = Utils.get_component(resources_container, "ZealotLabel")
 	infiltrator_label = Utils.get_component(resources_container, "InfiltratorLabel")
+
+	faith_label = Utils.get_component(resources_container, "FaithLabel")
+	discipline_label = Utils.get_component(resources_container, "DisciplineLabel")
+	moral_label = Utils.get_component(resources_container, "MoralLabel")
+	knowledge_label = Utils.get_component(resources_container, "KnowledgeLabel")
 
 	button_group = load("res://button_group_click_modifier.tres")
 	button_container = Utils.get_component(p_parent, "ClickContainer")

@@ -9,6 +9,11 @@ static func resolve_ui(game_state: GameState, game_ui: GameUI) -> void:
 	game_ui.zealot_label.text = "%s" % game_state.current_zealot
 	game_ui.infiltrator_label.text = "%s" % game_state.current_infiltrator
 
+	game_ui.faith_label.text = "%s" % GameData.StatLevel.find_key(game_state.faith)
+	game_ui.discipline_label.text = "%s" % GameData.StatLevel.find_key(game_state.discipline)
+	game_ui.moral_label.text = "%s" % GameData.StatLevel.find_key(game_state.moral)
+	game_ui.knowledge_label.text = "%s" % GameData.StatLevel.find_key(game_state.knowledge)
+
 	game_ui.ritual_panel.resolve_ui(
 		# TODO: use a refcounted for storing all workers
 		game_state.get_ritual_workers(),
