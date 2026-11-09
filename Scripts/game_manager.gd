@@ -79,4 +79,4 @@ func _game_resolve() -> void:
 	for i: int in game_state.countries:
 		if i == GameData.PLAYER_ID:
 			continue
-		print(ActionHandler.compute(game_state.countries, game_state.relations, i))
+		print(ActionHandler.compute(game_state.countries, game_state.relations, game_state.weights, i))

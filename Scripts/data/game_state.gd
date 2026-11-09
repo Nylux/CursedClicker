@@ -33,6 +33,8 @@ var ritual_data: RitualData
 # countries data
 var countries: Dictionary[int, CountryData]
 var relations: Relations
+var weights: Dictionary[Vector3i, int]
+
 
 func _init() -> void:
 	reset()
@@ -122,6 +124,14 @@ func reset() -> void:
 	for i in range(number_relations):
 		var pair: PackedInt32Array = Random.decode_combinatorial_number_system(i, 2)
 		_discard = relations.get_relation(pair[0], pair[1])
+
+	weights = {}
+	for to in countries:
+		for from in countries:
+			if from == GameData.PLAYER_ID or to == from:
+				continue
+			for op in GameData.Operation.values():
+				GameApi.init_weight(weights, from, to, op)
 
 	EventBus.data_changed.emit()
 
