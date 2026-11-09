@@ -7,11 +7,9 @@ enum StatLevel {
 }
 
 static func compute_efficiency(primary: GameData.StatLevel, secondary: GameData.StatLevel) -> float:
-	var raw: int = 2*primary + secondary - 3
+	var raw: int = 2*primary + secondary
 
 	match raw:
-		0:
-			return .0
 		1:
 			return .33
 		2:
@@ -24,3 +22,5 @@ static func compute_efficiency(primary: GameData.StatLevel, secondary: GameData.
 			return -.40
 		-3:
 			return -.5
+		_:
+			return .0

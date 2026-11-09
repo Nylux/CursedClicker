@@ -16,7 +16,7 @@ var current_cultist: int
 var current_zealot: int
 var current_infiltrator: int
 
-var ritual_workers: float
+var ritual_workers: int
 
 var faith: GameData.StatLevel
 var discipline: GameData.StatLevel
@@ -88,7 +88,7 @@ func reset() -> void:
 	current_blood = 0
 	current_corruption = 0
 	current_population = MAX_POPULATION
-	current_cultist = 10000
+	current_cultist = 0
 	current_zealot = 0
 	current_infiltrator = 0
 
@@ -100,7 +100,7 @@ func reset() -> void:
 		features.add(n)
 
 	ritual_data = RitualData.new()
-	ritual_workers = 0.0
+	ritual_workers = 0
 
 	
 	faith = GameData.StatLevel.MID
@@ -117,27 +117,42 @@ func reset() -> void:
 
 
 func set_ritual_workers(amount: int) -> void:
-	ritual_workers = amount / 100.0
+	ritual_workers = int(amount / 100.0 * current_cultist)
 
 	EventBus.data_changed.emit()
-	# add logic if multiple workers are used to avoid Sum > 1.0
+	# add logic if multiple workers are used to avoid Sum > current_cultist
+
+
+func get_current_cultist() -> int:
+	return current_cultist
 
 
 func get_ritual_workers() -> int:
-	return int(ritual_workers * current_cultist)
+	return ritual_workers
+
+
+func get_ritual_workers_percent() -> float:
+	if current_cultist <= 0:
+		return 0.
+	return ritual_workers / float(current_cultist) * 100.0
+
 
 func progress_ritual() -> void:
-	var cultist_to_add = ritual_data.progress(get_ritual_workers())
+	var cultist_to_add = ritual_data.progress(get_ritual_workers(), religious_eff())
 	add_cultist(cultist_to_add)
 
-func religious_eff() -> void:
-	return GameData.compute_efficiency(self.faith, self.discipline)
 
-func combat_eff() -> void:
-	return GameData.compute_efficiency(self.discipline, self.moral)
+func religious_eff() -> float:
+	return 1.0 + GameData.compute_efficiency(self.faith, self.discipline)
 
-func mental_eff() -> void:
-	return GameData.compute_efficiency(self.moral, self.knowledge)
 
-func research_eff() -> void:
-	return GameData.compute_efficiency(self.knowledge, self.faith)
+func combat_eff() -> float:
+	return 1.0 + GameData.compute_efficiency(self.discipline, self.moral)
+
+
+func mental_eff() -> float:
+	return 1.0 + GameData.compute_efficiency(self.moral, self.knowledge)
+
+
+func research_eff() -> float:
+	return 1.0 + GameData.compute_efficiency(self.knowledge, self.faith)

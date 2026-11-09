@@ -8,8 +8,8 @@ const K: float = 100.0
 func add_power(value: float) -> void:
 	power += value
 
-func progress(workers: int) -> int:
-	cur_progress += power * (K + workers) / K
+func progress(workers: int, eff: float) -> int:
+	cur_progress += power * (K + workers) / K * eff
 
 	var completed = int(cur_progress)
 	cur_progress -= completed
