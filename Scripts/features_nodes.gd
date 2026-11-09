@@ -7,6 +7,7 @@ static var altar := UnlockableNode.new("altar", [rituals])
 static var expedition := UnlockableNode.new("expedition", [altar])
 static var temple := UnlockableNode.new("temple", [expedition])
 static var infiltration := UnlockableNode.new("infiltration", [rituals])
+static var covert := UnlockableNode.new("covert", [infiltration])
 
 ## subfeatures
 static var rituals_stat := UnlockableNode.new("rituals_stat", [rituals])
@@ -53,6 +54,7 @@ static var nodes: Array[UnlockableNode] = [
 	expedition,
 	temple,
 	infiltration,
+	covert,
 	rituals_stat,
 	rituals_stat_power,
 	altar_curse1,

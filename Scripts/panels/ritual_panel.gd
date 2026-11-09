@@ -6,10 +6,6 @@ var worker_label: Label
 var worker_slider: HSlider
 
 var stat_amount: int = 1
-var button_amount: int = 1
-
-var stat_index: int = 0
-var unlock_index: int = 0
 
 
 func _init(

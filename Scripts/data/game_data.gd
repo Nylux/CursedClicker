@@ -24,3 +24,13 @@ static func compute_efficiency(primary: GameData.StatLevel, secondary: GameData.
 			return -.5
 		_:
 			return .0
+
+
+enum DiplomaticStatus {
+	NO_RELATION,
+	OPEN_WAR,
+	COLD_WAR,
+	ECONOMIC_RELATION,
+	SHARED_INTEREST,
+	SUBJUGATED,
+}

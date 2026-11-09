@@ -3,12 +3,6 @@ class_name InfiltrationPanel extends Node
 var ui: TemplateUI
 var ui_placeholder: Control
 
-var stat_amount: int = 1
-var button_amount: int = 1
-
-var stat_index: int = 0
-var unlock_index: int = 0
-
 var spy_button: Button
 var infiltrate_button: Button
 var unrest_button: Button

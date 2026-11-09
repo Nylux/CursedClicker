@@ -32,6 +32,7 @@ var ritual_data: RitualData
 
 # countries data
 var countries: Array[CountryData]
+var relations: RelationData
 
 func _init() -> void:
 	reset()
@@ -113,6 +114,8 @@ func reset() -> void:
 		CountryData.new("test"),
 		CountryData.new("test2"),
 	]
+	relations = RelationData.new()
+
 	EventBus.data_changed.emit()
 
 

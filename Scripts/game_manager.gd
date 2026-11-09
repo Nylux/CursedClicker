@@ -23,6 +23,13 @@ func _ready() -> void:
 	)
 	add_child(infiltration)
 
+	var covert = CovertPanel.new(
+		Utils.get_component(self, "TemplateUI2"),
+		Utils.get_component(self, "PlaceholderUI2"),
+		"Covert",
+	)
+	add_child(covert)
+
 	ritual_timer = Timer.new()
 	ritual_timer.timeout.connect(game_state.progress_ritual)
 	add_child(ritual_timer)
@@ -42,6 +49,7 @@ func _ready() -> void:
 	# first update
 	GameApi.try_unlock_node(game_state, FeaturesNode.rituals)
 	GameApi.try_unlock_node(game_state, FeaturesNode.infiltration)
+	GameApi.try_unlock_node(game_state, FeaturesNode.covert)
 	EventBus.data_changed.emit()
 
 
