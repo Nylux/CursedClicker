@@ -3,7 +3,7 @@ class_name GameManager extends Node
 var game_state: GameState
 var game_ui: GameUI
 
-var ritual_timer: Timer
+var ticked_timer: Timer
 
 func _ready() -> void:
 	game_state = GameState.new()
@@ -30,10 +30,10 @@ func _ready() -> void:
 	)
 	add_child(covert)
 
-	ritual_timer = Timer.new()
-	ritual_timer.timeout.connect(game_state.progress_ritual)
-	add_child(ritual_timer)
-	ritual_timer.start(1.)
+	ticked_timer = Timer.new()
+	ticked_timer.timeout.connect(_game_resolve)
+	add_child(ticked_timer)
+	ticked_timer.start(1.)
 
 	game_ui = GameUI.new(self, ritual)
 
@@ -71,3 +71,12 @@ func _on_button_group_pressed(button: Button, gs: GameState) -> void:
 			gs.click_multiplier = 100
 		"ButtonTimes1000":
 			gs.click_multiplier = 1000
+
+
+func _game_resolve() -> void:
+	game_state.progress_ritual()
+
+	for i: int in game_state.countries:
+		if i == GameData.PLAYER_ID:
+			continue
+		print(ActionHandler.compute(game_state.countries, game_state.relations, i))

@@ -31,8 +31,8 @@ var click_multiplier: int
 var ritual_data: RitualData
 
 # countries data
-var countries: Array[CountryData]
-var relations: RelationData
+var countries: Dictionary[int, CountryData]
+var relations: Relations
 
 func _init() -> void:
 	reset()
@@ -110,11 +110,18 @@ func reset() -> void:
 	knowledge = GameData.StatLevel.MID
 
 
-	countries = [
-		CountryData.new("test"),
-		CountryData.new("test2"),
-	]
-	relations = RelationData.new()
+	countries = {
+		GameData.PLAYER_ID: CountryData.new("player"),
+		GameData.COUNTRY_0_ID: CountryData.new("test"),
+		GameData.COUNTRY_1_ID: CountryData.new("test2"),
+	}
+
+	relations = Relations.new()
+	var _discard: RelationData
+	var number_relations = Random.binomial_coefficient_ym(countries.size(), 2)
+	for i in range(number_relations):
+		var pair: PackedInt32Array = Random.decode_combinatorial_number_system(i, 2)
+		_discard = relations.get_relation(pair[0], pair[1])
 
 	EventBus.data_changed.emit()
 

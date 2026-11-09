@@ -34,3 +34,19 @@ enum DiplomaticStatus {
 	SHARED_INTEREST,
 	SUBJUGATED,
 }
+
+enum Stance {
+	Neutral,
+}
+
+const PLAYER_ID = 0
+const COUNTRY_0_ID = 1
+const COUNTRY_1_ID = 2
+
+enum Operation {
+	Invest,
+	DeclareWar,
+	AskForPeace,
+	AskForMercy,
+	Subjugate
+}
