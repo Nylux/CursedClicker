@@ -29,10 +29,9 @@ static func compute_efficiency(primary: GameData.StatLevel, secondary: GameData.
 enum DiplomaticStatus {
 	NO_RELATION,
 	OPEN_WAR,
-	COLD_WAR,
 	ECONOMIC_RELATION,
-	SHARED_INTEREST,
-	SUBJUGATED,
+	CLIENT_STATE,
+	OVERLORD,
 }
 
 enum Stance {
@@ -45,8 +44,13 @@ const COUNTRY_1_ID = 2
 
 enum Operation {
 	Invest,
+	Spy,
+	Covert,
 	DeclareWar,
 	AskForPeace,
 	AskForMercy,
-	Subjugate
+	ImposePeace,
+	Subjugate,
+	SendTroop,
+	Recruit,
 }

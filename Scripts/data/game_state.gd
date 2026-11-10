@@ -33,7 +33,7 @@ var ritual_data: RitualData
 # countries data
 var countries: Dictionary[int, CountryData]
 var relations: Relations
-var weights: Dictionary[Vector3i, int]
+var weights: Dictionary[Vector3i, float]
 
 
 func _init() -> void:
@@ -119,11 +119,11 @@ func reset() -> void:
 	}
 
 	relations = Relations.new()
-	var _discard: RelationData
-	var number_relations = Random.binomial_coefficient_ym(countries.size(), 2)
-	for i in range(number_relations):
-		var pair: PackedInt32Array = Random.decode_combinatorial_number_system(i, 2)
-		_discard = relations.get_relation(pair[0], pair[1])
+	for from in countries:
+		for to in countries:
+			if to == from:
+				continue
+			relations.set_relation(from, to, RelationData.new())
 
 	weights = {}
 	for to in countries:

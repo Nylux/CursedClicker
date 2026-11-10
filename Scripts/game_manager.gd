@@ -5,7 +5,10 @@ var game_ui: GameUI
 
 var ticked_timer: Timer
 
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
 func _ready() -> void:
+	rng.seed = 0
 	game_state = GameState.new()
 
 	var ritual = RitualPanel.new(
@@ -79,4 +82,17 @@ func _game_resolve() -> void:
 	for i: int in game_state.countries:
 		if i == GameData.PLAYER_ID:
 			continue
-		print(ActionHandler.compute(game_state.countries, game_state.relations, game_state.weights, i))
+		ActionHandler.compute(game_state.countries, game_state.relations, game_state.weights, i)
+
+	for i: int in game_state.countries:
+		if i == GameData.PLAYER_ID:
+			continue
+		var dbg: String = GameApi.get_dbg_str(game_state.weights, i)
+		if game_state.countries[i].lock_in_operation == 0:
+			var op: OperationData = ActionHandler.choose(game_state.weights, i, rng)
+			# TODO: this is a placeholder
+			game_state.countries[i].lock_in_operation = randi_range(3, 7)
+			dbg += "= %s" % op
+		else:
+			game_state.countries[i].lock_in_operation -= 1
+		print(dbg)
