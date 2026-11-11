@@ -1,12 +1,12 @@
 class_name ActionHandler extends RefCounted
 
 
-static func sig(x: float) -> float:
-	return 1.0 / (1.0 + exp(-x))
+static func sig(x) -> float:
+	return 1. / (1. + exp(-x))
 
 
-static func w(x: int, y: int) -> float:
-	return sig((x - y) / 100.)
+static func advantage(x: float, y: float) -> float:
+	return sig((x - y) / AiConfig.ADVANTAGE_NORMALIZATION)
 
 
 static func compute(
@@ -33,38 +33,36 @@ static func compute(
 			continue
 		var cur_relation = relations.get_relation(cur_country, to)
 		var to_relation = relations.get_relation(to, cur_country)
-		var w_armies: float = w(countries[cur_country].armies, countries[to].armies)
-		var w_treasury: float = w(countries[cur_country].treasury, countries[to].treasury)
+		var advantage_armies: float = advantage(countries[cur_country].armies, countries[to].armies)
+		var advantage_treasury: float = advantage(countries[cur_country].treasury, countries[to].treasury)
 
-		if GameApi.is_client_state_of(to_relation, cur_relation) and w_armies > 0.:
+		if GameApi.is_client_state_of(to_relation, cur_relation) and advantage_armies > 0.:
 			if cur_relation.status == GameData.DiplomaticStatus.OPEN_WAR:
-				GameApi.add_weight(weights, cur_country, to, GameData.Operation.ImposePeace, 100.)
+				GameApi.add_weight(weights, cur_country, to, GameData.Operation.ImposePeace, AiConfig.WEIGHT_IMPOSE_PEACE)
 		else:
 			if cur_relation.suspicion >= 100:
-				GameApi.add_weight(weights, cur_country, to, GameData.Operation.DeclareWar, 100.)
+				GameApi.add_weight(weights, cur_country, to, GameData.Operation.DeclareWar, AiConfig.WEIGHT_DECLARE_WAR)
 
 			if cur_relation.status == GameData.DiplomaticStatus.OPEN_WAR:
 				# war resolution
 				if countries[to].treasury <= 0:
-					GameApi.add_weight(weights, cur_country, to, GameData.Operation.AskForPeace, maxf(10 * w_armies, 0.))
+					GameApi.add_weight(weights, cur_country, to, GameData.Operation.AskForPeace, AiConfig.WEIGHT_ASK_FOR_PEACE * advantage_armies)
 				if countries[to].armies <= 0:
-					GameApi.add_weight(weights, cur_country, to, GameData.Operation.Subjugate, 100.)
+					GameApi.add_weight(weights, cur_country, to, GameData.Operation.Subjugate, AiConfig.WEIGHT_SUBJUGATE)
 				if countries[cur_country].treasury <= 0:
-					GameApi.add_weight(weights, cur_country, to, GameData.Operation.AskForPeace, maxf(- 10 * w_armies, 0.))
+					GameApi.add_weight(weights, cur_country, to, GameData.Operation.AskForPeace, AiConfig.WEIGHT_ASK_FOR_PEACE * (1. - advantage_armies))
 				if countries[cur_country].armies <= 0:
-					GameApi.add_weight(weights, cur_country, to, GameData.Operation.AskForMercy, 100.)
-				if countries[cur_country].armies <= 0:
-					GameApi.add_weight(weights, cur_country, to, GameData.Operation.AskForMercy, 100.)
+					GameApi.add_weight(weights, cur_country, to, GameData.Operation.AskForMercy, AiConfig.WEIGHT_ASK_FOR_MERCY) 
 				
-				GameApi.add_weight(weights, cur_country, to, GameData.Operation.SendTroop, maxf(10 * w_armies, 0.))
-				GameApi.add_weight(weights, cur_country, to, GameData.Operation.Recruit, maxf(- w_armies, 0.))
+				GameApi.add_weight(weights, cur_country, to, GameData.Operation.SendTroop, AiConfig.WEIGHT_SEND_TROOP * advantage_armies)
+				GameApi.add_weight(weights, cur_country, to, GameData.Operation.Recruit, AiConfig.WEIGHT_RECRUIT * (1. - advantage_armies))
 
 		# pacific suspicion decision
-		GameApi.add_weight(weights, cur_country, to, GameData.Operation.Covert, maxf(10 * w(cur_relation.suspicion, 50), 0.))
-		GameApi.add_weight(weights, cur_country, to, GameData.Operation.Spy, maxf(10 * w(cur_relation.suspicion, 25), 0.))
+		GameApi.add_weight(weights, cur_country, to, GameData.Operation.Covert, AiConfig.WEIGHT_COVERT * advantage(cur_relation.suspicion , AiConfig.COVERT_SUSPICION_LEVEL))
+		GameApi.add_weight(weights, cur_country, to, GameData.Operation.Spy, AiConfig.WEIGHT_SPY * advantage(cur_relation.suspicion, AiConfig.SPY_SUSPICION_LEVEL))
 
 		# economic decision
-		GameApi.add_weight(weights, cur_country, to, GameData.Operation.Invest, maxf(10 * w_treasury, 0.))
+		GameApi.add_weight(weights, cur_country, to, GameData.Operation.Invest, AiConfig.WEIGHT_INVEST * advantage_treasury)
 
 static func choose(
 	weights: Dictionary[Vector3i, float], 
@@ -72,6 +70,7 @@ static func choose(
 	rng: RandomNumberGenerator
 ) -> OperationData:
 	# x = from, y = to, z = op
+	# self invest if nothing else is available, else not
 	var key: Vector3i = Vector3i(cur_country, cur_country, GameData.Operation.Invest)
 	
 	var sum_weight: float = 0.

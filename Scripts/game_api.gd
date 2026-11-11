@@ -32,7 +32,7 @@ static func init_weight(weights: Dictionary[Vector3i, float], from: int, to: int
 
 static func decay_weight(weights: Dictionary[Vector3i, float], from: int, to: int, op: GameData.Operation) -> void:
 	var w: float = weights[Vector3i(from, to, op)]
-	set_weight(weights, from, to, op, w * .95)
+	set_weight(weights, from, to, op, w * AiConfig.DECAY_WEIGHT)
 
 
 static func add_weight(weights: Dictionary[Vector3i, float], from: int, to: int, op: GameData.Operation, weight: float) -> void:
