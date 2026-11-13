@@ -11,6 +11,8 @@ var spy_label: Label
 var infiltrate_label: Label
 var unrest_label: Label
 
+var countries_label: Dictionary[int, Label]
+
 func _init(
 	p_ui: TemplateUI,
 	p_ui_placeholder: Control,
@@ -29,8 +31,13 @@ func _ready() -> void:
 	create_button(unrest_button, unrest_label, "Unrest")
 
 
-func resolve_ui() -> void:
-	pass
+func resolve_ui(countries: Dictionary[int, CountryData]) -> void:
+	for country_id in countries:
+		countries_label[country_id].text = "%s: %s" % [
+			countries[country_id].name,
+			countries[country_id].treasury,
+		]
+
 
 func create_button(button: Button, label: Label, button_text: String) -> void:
 	var container = HBoxContainer.new()
@@ -42,3 +49,11 @@ func create_button(button: Button, label: Label, button_text: String) -> void:
 	container.add_child(label)
 	container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	ui.upgrade_container.add_child(container)
+
+
+func create_labels(countries: Dictionary[int, CountryData]) -> void:
+	for country_id in countries:
+		var label = Label.new()
+		label.text = "%s: LOREM IPSUM" % countries[country_id].name
+		ui.stat.add_child(label)
+		countries_label[country_id] = label

@@ -7,3 +7,6 @@ Exports/*
 
 # Godot tmp
 *.tmp
+
+# vscode
+.vscode/*

@@ -17,8 +17,15 @@ var button_container: HBoxContainer
 var button_group: ButtonGroup
 
 var ritual_panel: RitualPanel
+var infiltration_panel: InfiltrationPanel
 
-func _init(p_parent: Node, p_ritual_panel: RitualPanel) -> void:
+func _init(
+	p_parent: Node,
+	p_game_state: GameState,
+	p_ritual_panel: RitualPanel,
+	p_infiltration_panel: InfiltrationPanel
+) -> void:
+
 	resources_container = Utils.get_component(p_parent, "ResourcesContainer")
 
 	blood_label = Utils.get_component(resources_container, "BloodLabel")
@@ -41,3 +48,5 @@ func _init(p_parent: Node, p_ritual_panel: RitualPanel) -> void:
 	Utils.get_component(button_container, "ButtonTimes1000").text = "X 1000"
 
 	ritual_panel = p_ritual_panel
+	infiltration_panel = p_infiltration_panel
+	infiltration_panel.create_labels(p_game_state.countries)

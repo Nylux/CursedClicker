@@ -62,4 +62,4 @@ static func key_to_str(k: Vector3i) -> String:
 
 
 static func is_client_state_of(from: RelationData, to: RelationData) -> bool:
-	return from.status == GameData.DiplomaticStatus.CLIENT_STATE and to.status == GameData.DiplomaticStatus.OVERLORD
+	return from.hierarchy == GameData.Hierarchy.CLIENT_STATE and to.hierarchy == GameData.Hierarchy.OVERLORD

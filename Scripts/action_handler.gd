@@ -10,9 +10,9 @@ static func advantage(x: float, y: float) -> float:
 
 
 static func compute(
-	countries: Dictionary[int, CountryData], 
-	relations: Relations, 
-	weights: Dictionary[Vector3i, float], 
+	countries: Dictionary[int, CountryData],
+	relations: Relations,
+	weights: Dictionary[Vector3i, float],
 	cur_country: int
 ) -> void:
 
@@ -64,15 +64,15 @@ static func compute(
 		# economic decision
 		GameApi.add_weight(weights, cur_country, to, GameData.Operation.Invest, AiConfig.WEIGHT_INVEST * advantage_treasury)
 
+
 static func choose(
-	weights: Dictionary[Vector3i, float], 
+	weights: Dictionary[Vector3i, float],
 	cur_country: int,
 	rng: RandomNumberGenerator
 ) -> OperationData:
 	# x = from, y = to, z = op
-	# self invest if nothing else is available, else not
-	var key: Vector3i = Vector3i(cur_country, cur_country, GameData.Operation.Invest)
-	
+	var key: Vector3i
+
 	var sum_weight: float = 0.
 	for k in weights:
 		if k.x != cur_country:
@@ -80,7 +80,7 @@ static func choose(
 		sum_weight += weights[k]
 
 	if sum_weight <= .0:
-		return OperationData.new(key)
+		push_error("invalid sum weight: %s" % sum_weight)
 
 	var rnd: float = rng.randf_range(0., sum_weight)
 	
@@ -94,3 +94,62 @@ static func choose(
 			break
 
 	return OperationData.new(key)
+
+
+static func resolve(
+	countries: Dictionary[int, CountryData],
+	relations: Relations, 
+	op_data: OperationData,
+	rng: RandomNumberGenerator
+) -> void:
+	var cur_country: CountryData = countries[op_data.who]
+	var target_country: CountryData = countries[op_data.target]
+	var cur_relation = relations.get_relation(op_data.who, op_data.target)
+	var target_relation = relations.get_relation(op_data.target, op_data.who)
+	match op_data.op:
+		GameData.Operation.Invest:
+			#TODO: moves magic number to AiConfig once the model is written
+			var advantage_treasury: float = advantage(cur_country.treasury, target_country.treasury)
+			var invest_chance: float = .6
+			var redistribution_chance: float = .2
+			var amount_invest: float = cur_country.treasury * advantage_treasury
+			if cur_relation.status == GameData.DiplomaticStatus.ECONOMIC_RELATION:
+				invest_chance *= 1.5
+			if target_relation.status == GameData.DiplomaticStatus.ECONOMIC_RELATION:
+				redistribution_chance *= 1.5
+			var invest: float = rng.randf()
+			var redistribution: float = rng.randf()
+
+			if invest <= invest_chance:
+				if redistribution <= redistribution_chance:
+					cur_country.treasury += int(amount_invest * advantage_treasury)
+					target_country.treasury += int(amount_invest * (1. - advantage_treasury))
+				else:
+					cur_country.treasury += int(amount_invest * advantage_treasury)
+					target_country.treasury -= int(amount_invest * advantage_treasury)
+			else:
+				cur_country.treasury -= int(amount_invest)
+
+		GameData.Operation.Spy:
+			print("not implemented")
+		GameData.Operation.Covert:
+			print("not implemented")
+		GameData.Operation.DeclareWar:
+			print("not implemented")
+		GameData.Operation.AskForPeace:
+			print("not implemented")
+		GameData.Operation.AskForMercy:
+			print("not implemented")
+		GameData.Operation.ImposePeace:
+			print("not implemented")
+		GameData.Operation.Subjugate:
+			print("not implemented")
+		GameData.Operation.SendTroop:
+			print("not implemented")
+		GameData.Operation.Recruit:
+			print("not implemented")
+		_:
+			push_error("invalid operation: %s" % op_data.op)
+
+	# TODO: this is a placeholder
+	cur_country.lock_in_operation = rng.randi_range(3, 7)

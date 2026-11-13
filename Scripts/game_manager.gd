@@ -8,8 +8,8 @@ var ticked_timer: Timer
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready() -> void:
-	rng.seed = 0
 	game_state = GameState.new()
+	rng.seed = game_state.seed
 
 	var ritual = RitualPanel.new(
 		Utils.get_component(self, "TemplateUI0"),
@@ -38,7 +38,7 @@ func _ready() -> void:
 	add_child(ticked_timer)
 	ticked_timer.start(1.)
 
-	game_ui = GameUI.new(self, ritual)
+	game_ui = GameUI.new(self, game_state, ritual, infiltration)
 
 	# it binds a state to an autoload, code smell if game is restarted
 	# TODO: handle it better
@@ -90,8 +90,7 @@ func _game_resolve() -> void:
 		var dbg: String = GameApi.get_dbg_str(game_state.weights, i)
 		if game_state.countries[i].lock_in_operation == 0:
 			var op: OperationData = ActionHandler.choose(game_state.weights, i, rng)
-			# TODO: this is a placeholder
-			game_state.countries[i].lock_in_operation = randi_range(3, 7)
+			ActionHandler.resolve(game_state.countries, game_state.relations, op, rng)
 			dbg += "= %s" % op
 		else:
 			game_state.countries[i].lock_in_operation -= 1

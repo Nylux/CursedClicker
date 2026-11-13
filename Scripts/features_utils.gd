@@ -1,6 +1,6 @@
 class_name FeaturesUtils extends RefCounted
 
-static func create_stats(container: Control, placeholder: Control, stat_amount: int):
+static func create_stats(container: Control, stat_amount: int):
 	container.visible = true
 	var stat = container.get_node("Statistics")
 	
@@ -23,7 +23,6 @@ static func create_stats(container: Control, placeholder: Control, stat_amount: 
 		label.visible = false
 		stat.add_child(label)
 
-	placeholder.visible = false
 
 static func create_upgrades_button(container: Control, button_amount: int) -> void:
 	for i in button_amount:

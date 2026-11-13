@@ -2,6 +2,9 @@ class_name GameState extends RefCounted
 
 const MAX_POPULATION: int = 8_253_443_180
 
+# seed for randomness
+var seed: int
+
 # resources values
 var total_blood: int
 var total_corruption: int
@@ -82,6 +85,8 @@ func cultist_sacrificied(amount: int):
 
 
 func reset() -> void:
+	seed = 0
+
 	total_blood = 0
 	total_corruption = 0
 	total_cultist = 0

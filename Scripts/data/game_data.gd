@@ -30,12 +30,16 @@ enum DiplomaticStatus {
 	NO_RELATION,
 	OPEN_WAR,
 	ECONOMIC_RELATION,
-	CLIENT_STATE,
-	OVERLORD,
 }
 
 enum Stance {
-	Neutral,
+	NEUTRAL,
+}
+
+enum Hierarchy {
+	NONE,
+	OVERLORD,
+	CLIENT_STATE
 }
 
 const PLAYER_ID = 0

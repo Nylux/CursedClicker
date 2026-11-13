@@ -25,7 +25,7 @@ func _ready() -> void:
 	FeaturesNode.rituals.connect_unlocked(FeaturesUtils.activate.bind(ui, ui_placeholder))
 
 	# setup internal logic
-	FeaturesUtils.create_stats(ui.stat_container, ui.stat_placeholder, stat_amount)
+	FeaturesUtils.create_stats(ui.stat_container, stat_amount)
 
 	worker_label = Label.new()
 	worker_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL

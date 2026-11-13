@@ -21,3 +21,7 @@ static func resolve_ui(game_state: GameState, game_ui: GameUI) -> void:
 		game_state.get_current_cultist(),
 		game_state.ritual_data
 	)
+
+	game_ui.infiltration_panel.resolve_ui(
+		game_state.countries
+	)
